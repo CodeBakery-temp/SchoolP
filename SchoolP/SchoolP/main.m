@@ -10,6 +10,10 @@ int main(int argc, const char * argv[])
     @autoreleasepool {
         NSLog(@"___________START");
         
+        
+        //mumsfillibabba
+        
+        
         /*
          // Databas anrop
          DBService* db = [DBService database];
