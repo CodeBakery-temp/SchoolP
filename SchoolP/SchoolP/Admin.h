@@ -5,10 +5,12 @@
 @property (nonatomic, copy) NSString *firstName;
 @property (nonatomic, copy) NSString *lastName;
 @property (nonatomic, copy) NSString *mailAddress;
+@property (nonatomic, copy) NSString *phoneNumber;
+//@property (nonatomic, copy) NSArray *courses;
 
--(id) initWithAdminName: (NSString *)name lastName: (NSString *) lastName MailAddress: (NSString *)mailAddress;
++(id) adminWithName: (NSString *)name lastName: (NSString *) lastName mailAddress: (NSString *)mailAddress phoneNumber: (NSString *) phoneNumber courses: (NSArray *) courses;
 
-+(id) adminWithName: (NSString *)name lastName: (NSString *) lastName MailAddress: (NSString *)mailAddress;
+-(id) initWithAdminName: (NSString *)name lastName: (NSString *) lastName mailAddress: (NSString *)mailAddress phoneNumber: (NSString *) phoneNumber courses: (NSArray *) courses;
 
 -(void) sendMessageToStudentWithMailAdress: (NSString *)mail;
 

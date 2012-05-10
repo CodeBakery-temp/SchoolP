@@ -6,13 +6,11 @@
 @property (nonatomic, copy) NSString *lastName;
 @property (nonatomic, copy) NSString *mailAddress;
 @property (nonatomic, copy) NSString *phoneNumber;
+//@property (nonatomic, copy) NSArray *courses;
 
 
++(id) studentWithName: (NSString *)name lastName: (NSString *) lastName mailAddress: (NSString *)mailAddress phoneNumber: (NSString *) phoneNumber courses: (NSDictionary *) courses;
 
--(id) initWithStudentName: (NSString *)name lastName: (NSString *) lastName mailAddress: (NSString *)mailAddress phoneNumber: (NSString *) phoneNumber;
-
-+(id) studentWithName: (NSString *)name lastName: (NSString *) lastName mailAddress: (NSString *)mailAddress phoneNumber: (NSString *) phoneNumber;
-
-
+-(id) initWithStudentName: (NSString *)name lastName: (NSString *) lastName mailAddress: (NSString *)mailAddress phoneNumber: (NSString *) phoneNumber courses: (NSDictionary *) courses;
 
 @end

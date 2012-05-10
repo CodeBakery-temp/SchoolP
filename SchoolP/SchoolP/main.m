@@ -11,9 +11,13 @@ int main(int argc, const char * argv[])
         NSLog(@"___________START");
 
         /*
-         // Databas anrop
+         // Databas anrop med users get STUDENT
          DBService* db = [DBService database];
-         [db getAllUsers];*/
+         NSDictionary *users = [db getAllUsers];
+         for(Student* obj in [users objectForKey:@"STUDENT"]) {
+            NSLog(@"%@", [obj mailAddress]);
+         }
+         */
         
         /*
          //dag år månad
@@ -27,7 +31,17 @@ int main(int argc, const char * argv[])
          NSLog(@"This is NSDictionary --> %@", studentMM);
          
          
-         NSLog(@"%@", student);*/
+         NSLog(@"%@", student);
+         */
+        
+        /*
+         // Notification
+         NSString * myMessage = [NSString stringWithFormat:@"%@ %@ (phonenumer: %@), you are late! A copy was sent to you're mail: %@", studentIM.firstName, studentIM.lastName, studentIM.phoneNumber, studentIM.mailAddress];
+        NSDictionary * dict = [NSDictionary dictionaryWithObject:myMessage forKey: admin.firstName];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendMessage" object: studentIM
+                                                          userInfo:dict];
+         */
         
         NSLog(@"___________STOP");
         

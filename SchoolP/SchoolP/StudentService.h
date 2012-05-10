@@ -2,15 +2,8 @@
 
 @interface ServiceStudent : Student
 
-
 +(id) studentsFromDictonary:(NSDictionary*) dictionary;
-
--(NSArray *) studentCourse;
-
 -(id) asDictionary;
-
-
-
-
+//-(NSArray *) studentCourse;
 
 @end

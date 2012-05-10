@@ -6,7 +6,6 @@
 +(id)createDatabase;
 -(id)initDatabase;
 
--(NSArray*)getAllUsers;
-// bladibladiblas!!
+-(NSDictionary*)getAllUsers;
 
 @end

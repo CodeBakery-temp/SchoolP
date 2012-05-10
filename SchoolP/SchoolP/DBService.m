@@ -1,4 +1,5 @@
 #import "DBService.h"
+#import "Admin.h"
 #import "Student.h"
 #import "StudentService.h"
 
@@ -8,7 +9,7 @@ NSString *const getAll = @"_all_docs?include_docs=true";
 
 @implementation DBService {
     
-    NSMutableArray *users;
+    NSMutableDictionary *users;
 }
 
 
@@ -25,16 +26,16 @@ NSString *const getAll = @"_all_docs?include_docs=true";
 -(id)initDatabase {
     if(self = [super init])
     {
-        users = [NSMutableArray array];
-        //NSLog(@"DB: %@", self);
-        //NSLog(@"Array: %@", users);
+        users = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                 [NSMutableArray array], @"ADMIN",
+                 [NSMutableArray array], @"STUDENT", nil];
     }
     return self;
 }
 
 
--(NSArray*)getAllUsers {
-    NSString* urlString = [NSString stringWithFormat:@"http://zephyr.iriscouch.com/grand-schema/_all_docs?include_docs=true"];
+-(NSDictionary*)getAllUsers {
+    NSString* urlString = [NSString stringWithFormat:@"%@%@", usersDB, getAll];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"GET"];
@@ -58,18 +59,25 @@ NSString *const getAll = @"_all_docs?include_docs=true";
         for (NSDictionary *object in usersDic) {    // Step into JSON array (single index)
             NSDictionary* dict = [object objectForKey:@"doc"]; // Step into 'doc' (current object key/values)
             //NSLog(@"OBJECT: %@", [dict allKeys]);
-            Student* student = [Student studentWithName:[dict objectForKey:@"firstName"] 
-                                               lastName:[dict objectForKey:@"lastName"] 
-                                            mailAddress:[dict objectForKey:@"email"] 
-                                            phoneNumber:[dict objectForKey:@"phone"]];
-            [users addObject:student];
+            if([[dict objectForKey:@"admin"]isEqualToString:@"0"]) {
+                Student* user = [Student studentWithName:[dict objectForKey:@"firstName"] 
+                                                lastName:[dict objectForKey:@"lastName"] 
+                                             mailAddress:[dict objectForKey:@"mailAddress"] 
+                                             phoneNumber:[dict objectForKey:@"phoneNumber"]
+                                                 courses:[dict objectForKey:@"courses"]];
+                [[users objectForKey:@"STUDENT"] addObject:user];
+            }
+            else {
+                Admin* user = [Admin adminWithName:[dict objectForKey:@"firstName"] 
+                                          lastName:[dict objectForKey:@"lastName"] 
+                                       mailAddress:[dict objectForKey:@"mailAddress"]
+                                       phoneNumber:[dict objectForKey:@"phoneNumber"]
+                                           courses:[dict objectForKey:@"courses"]];
+                [[users objectForKey:@"ADMIN"] addObject:user];
+            }
         }
-        /*for (Student* student in users) {
-         NSLog(@"%@", student);
-         }*/
         return users;
     }
-    
 }
 
 @end

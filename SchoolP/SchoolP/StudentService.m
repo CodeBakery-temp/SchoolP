@@ -1,15 +1,28 @@
 #import "StudentService.h"
 
-@implementation ServiceStudent
-{
+@implementation ServiceStudent {
     NSMutableDictionary *allCourses;
-    //    NSMutableDictionary *allStudents;
+    // NSMutableDictionary *allStudents;
     
 }
 
++(id) studentsFromDictonary:(NSDictionary*) dictionary {
+    return [self studentWithName:[dictionary valueForKey:@"name"]
+                        lastName:[dictionary valueForKey:@"lastname"]
+                     mailAddress:[dictionary valueForKey:@"mailaddress"]
+                     phoneNumber:[dictionary valueForKey:@"phonenumber"]
+                         courses:[dictionary valueForKey:@"courses"]];
+}
 
-//-(NSArray *) studentCourse
-//{
+-(id) asDictionary {
+    return [NSDictionary dictionaryWithObjectsAndKeys:self.firstName, @"name", 
+            self.lastName, @"lastname", 
+            self.mailAddress, @"mailaddress", 
+            self.phoneNumber, @"phonenumber",
+            nil];
+}
+
+//-(NSArray *) studentCourse {
 //    
 //    NSSortDescriptor *byCourse = [NSSortDescriptor sortDescriptorWithKey:@"course" ascending:NO];
 //
@@ -21,28 +34,5 @@
 //    return [courses sortedArrayUsingDescriptors:[NSArray arrayWithObject:byCourse]];
 //
 //}
-
--(id) asDictionary
-{
-    return [NSDictionary dictionaryWithObjectsAndKeys:self.firstName, @"name", 
-            self.lastName, @"lastname", 
-            self.mailAddress, @"mailaddress", 
-            self.phoneNumber, @"phonenumber",
-            nil];
-}
-
-
-+(id) studentsFromDictonary:(NSDictionary*) dictionary
-{
-    return [self studentWithName:[dictionary valueForKey:@"name"]
-                        lastName:[dictionary valueForKey:@"lastname"]
-                     mailAddress:[dictionary valueForKey:@"mailaddress"]
-                     phoneNumber:[dictionary valueForKey:@"phonenumber"]];
-}
-
-
-
-
-
 
 @end
