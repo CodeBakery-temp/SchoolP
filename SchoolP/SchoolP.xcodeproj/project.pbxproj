@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		067575E11560EE9500FBCCB9 /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = 067575E01560EE9500FBCCB9 /* Lecture.m */; };
+		067575E51560EF3100FBCCB9 /* ScheduleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 067575E41560EF3100FBCCB9 /* ScheduleService.m */; };
+		067575E81560F11100FBCCB9 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 067575E71560F11100FBCCB9 /* Note.m */; };
 		06EFCE3015594F4F00498776 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EFCE2F15594F4F00498776 /* Foundation.framework */; };
 		06EFCE3315594F4F00498776 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE3215594F4F00498776 /* main.m */; };
 		06EFCE3715594F4F00498776 /* SchoolP.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06EFCE3615594F4F00498776 /* SchoolP.1 */; };
@@ -31,6 +34,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		067575DF1560EE9400FBCCB9 /* Lecture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lecture.h; sourceTree = "<group>"; };
+		067575E01560EE9500FBCCB9 /* Lecture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lecture.m; sourceTree = "<group>"; };
+		067575E31560EF3100FBCCB9 /* ScheduleService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleService.h; sourceTree = "<group>"; };
+		067575E41560EF3100FBCCB9 /* ScheduleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleService.m; sourceTree = "<group>"; };
+		067575E61560F11100FBCCB9 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		067575E71560F11100FBCCB9 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
 		06EFCE2B15594F4F00498776 /* SchoolP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SchoolP; sourceTree = BUILT_PRODUCTS_DIR; };
 		06EFCE2F15594F4F00498776 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		06EFCE3215594F4F00498776 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -114,6 +123,10 @@
 				06EFCE431559506800498776 /* Admin.m */,
 				06EFCE451559508F00498776 /* Schedule.h */,
 				06EFCE461559508F00498776 /* Schedule.m */,
+				067575DF1560EE9400FBCCB9 /* Lecture.h */,
+				067575E01560EE9500FBCCB9 /* Lecture.m */,
+				067575E61560F11100FBCCB9 /* Note.h */,
+				067575E71560F11100FBCCB9 /* Note.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -125,6 +138,8 @@
 				06EFCE49155950CF00498776 /* DBService.m */,
 				06EFCE4B1559510000498776 /* StudentService.h */,
 				06EFCE4C1559510000498776 /* StudentService.m */,
+				067575E31560EF3100FBCCB9 /* ScheduleService.h */,
+				067575E41560EF3100FBCCB9 /* ScheduleService.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -186,6 +201,9 @@
 				06EFCE471559508F00498776 /* Schedule.m in Sources */,
 				06EFCE4A155950CF00498776 /* DBService.m in Sources */,
 				06EFCE4D1559510000498776 /* StudentService.m in Sources */,
+				067575E11560EE9500FBCCB9 /* Lecture.m in Sources */,
+				067575E51560EF3100FBCCB9 /* ScheduleService.m in Sources */,
+				067575E81560F11100FBCCB9 /* Note.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +294,7 @@
 				06EFCE3C15594F4F00498776 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -13,4 +13,6 @@
 
 -(id) initWithStudentName: (NSString *)name lastName: (NSString *) lastName mailAddress: (NSString *)mailAddress phoneNumber: (NSString *) phoneNumber courses: (NSDictionary *) courses;
 
+-(NSMutableArray*)courses;
+
 @end

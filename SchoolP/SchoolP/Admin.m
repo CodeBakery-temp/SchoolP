@@ -46,6 +46,10 @@
 
 -(void)editSchedule:(NSString *)schedule day:(NSString *)day time:(NSNumber *)time {}
 
+-(NSMutableArray *)courses {
+    return courses;
+}
+
 -(NSString *)description {
     return [NSString stringWithFormat:@"Name: %@, %@, Mail: %@, Phone: %@, Courses: %@", self.firstName, self.lastName, self.mailAddress, self.phoneNumber, [courses componentsJoinedByString:@", "]];
 }

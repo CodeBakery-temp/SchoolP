@@ -10,18 +10,33 @@ int main(int argc, const char * argv[])
     @autoreleasepool {
         NSLog(@"___________START");
 
-        /*
-         // Databas anrop med users get STUDENT
-         DBService* db = [DBService database];
-         NSDictionary *users = [db getAllUsers];
-         for(Student* obj in [users objectForKey:@"STUDENT"]) {
-            NSLog(@"%@", [obj mailAddress]);
-         }
+        /* // Databas anrop
+        DBService* db = [DBService database];
+        ScheduleService* schedule = [ScheduleService schedule];
+        
+        NSDictionary* users = [db getUsers];
+        NSArray* lectures = [db getLectures];
+        
+        Student* student;
+        for(Student* user in [users objectForKey:@"STUDENT"]) {
+            student = user;
+            break;
+        }
+        //NSLog(@"%@ \n%@ \n%ld", student, lectures, currentWeek);
+        NSArray* weekLectures = [schedule getLecturesOfWeek:student lectures:lectures currentWeek:currentWeek];
+        
+        NSLog(@"LECTURES. %@", weekLectures);
+        NSDictionary* lecturesPerDays = [schedule getLecturesPerDays:weekLectures];
+        NSLog(@"\nMONDAY\n%@ \n TUESDAY\n%@ \n WEDNESDAY\n%@ \n THURSDAY\n%@ \nFRIDAY\n%@", [lecturesPerDays objectForKey:@"MONDAY"], 
+              [lecturesPerDays objectForKey:@"TUESDAY"], 
+              [lecturesPerDays objectForKey:@"WEDNESDAY"],
+              [lecturesPerDays objectForKey:@"THURSDAY"],
+              [lecturesPerDays objectForKey:@"FRIDAY"]);
          */
         
         /*
          //dag år månad
-         [[Schedule alloc] schedule];
+         [[Lecture alloc] lecture];
          */
         
         /*Student *student = [Student studentWithName:@"Orvar" lastName:@"Hassling" mailAddress:@"copy@paste.nu" phoneNumber:@"0735413452"];

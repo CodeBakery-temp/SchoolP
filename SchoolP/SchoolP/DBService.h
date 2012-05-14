@@ -6,6 +6,8 @@
 +(id)createDatabase;
 -(id)initDatabase;
 
--(NSDictionary*)getAllUsers;
+-(NSDictionary*) getUsers;
+-(NSMutableArray*) getLectures;
+-(NSDictionary*) getNotifications;
 
 @end

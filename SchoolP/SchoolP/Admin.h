@@ -20,5 +20,7 @@
 
 -(void) editSchedule: (NSString *)schedule day:(NSString *) day time: (NSNumber *) time;
 
+-(NSMutableArray*)courses;
+
 
 @end
