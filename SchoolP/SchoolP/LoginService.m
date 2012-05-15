@@ -7,12 +7,10 @@
 
 @synthesize studentLogin = _studentLogin;
 
-
 +(id) withUserDictionary:(NSDictionary *)dic
 {
     return [[self alloc] initWithUserDictionary:dic];
 }
-
 
 -(id) initWithUserDictionary: (NSDictionary *) dic
 {
@@ -49,9 +47,7 @@
                 state = FALSE;
             }
         }
-        
     }
-    
 }
 
 @end

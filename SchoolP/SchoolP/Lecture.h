@@ -16,9 +16,31 @@
 // daysOfWeek
 // weeks
 
-+ (id) courseWithName: (NSString *)course grade: (NSString *) grade teacher: (NSString*) teacher room: (NSString*) room courseID: (NSString *) courseID startTime: (NSString *) startTime stopTime: (NSString *) stopTime lunchStart: (NSString *) lunchStart lunchStop: (NSString *) lunchStop year: (NSString *) year daysOfWeek: (NSArray *) daysOfWeek weeks: (NSArray *) weeks;
++ (id) courseWithName: (NSString *)course
+                grade: (NSString *)grade
+              teacher: (NSString*)teacher
+                 room: (NSString*)room
+             courseID: (NSString *)courseID
+            startTime: (NSString *)startTime
+             stopTime: (NSString *)stopTime
+           lunchStart: (NSString *)lunchStart
+            lunchStop: (NSString *)lunchStop
+                 year: (NSString *)year
+           daysOfWeek: (NSArray *)daysOfWeek
+                weeks: (NSArray *)weeks;
 
-- (id) initCourseWithName: (NSString *)course grade: (NSString *) grade teacher: (NSString*) teacher room: (NSString*) room courseID: (NSString *) courseID startTime: (NSString *) startTime stopTime: (NSString *) stopTime lunchStart: (NSString *) lunchStart lunchStop: (NSString *) lunchStop year: (NSString *) year daysOfWeek: (NSArray *) daysOfWeek weeks: (NSArray *) weeks ;
+- (id) initCourseWithName: (NSString *)course
+                    grade: (NSString *)grade
+                  teacher: (NSString*)teacher
+                     room: (NSString*)room
+                 courseID: (NSString *)courseID
+                startTime: (NSString *)startTime
+                 stopTime: (NSString *)stopTime
+               lunchStart: (NSString *)lunchStart
+                lunchStop: (NSString *)lunchStop
+                     year: (NSString *)year
+               daysOfWeek: (NSArray *)daysOfWeek
+                    weeks: (NSArray *)weeks ;
 
 -(NSMutableArray *)daysOfWeek;
 

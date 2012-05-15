@@ -6,8 +6,13 @@
 +(id)createSchedule;
 -(id)initSchedule;
 
--(NSArray*)getLecturesOfWeek:(id)user lectures: (NSArray *) lectures currentWeek: (NSUInteger) currentWeek;
-//-(NSArray*)getLecturesOfDay:(id)user lectures: (NSArray *) lectures currentWeek: (NSUInteger) currentWeek;
+-(NSArray*)getLecturesOfWeek: (id)user
+                    lectures: (NSArray *)lectures
+                 currentWeek: (NSUInteger)currentWeek;
+
+/*-(NSArray*)getLecturesOfDay: (id)user 
+                   lectures: (NSArray *)lectures
+                currentWeek: (NSUInteger)currentWeek;*/
 
 -(NSDictionary*)getLecturesPerDays:(NSArray *)lectures;
 

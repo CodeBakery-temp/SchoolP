@@ -42,7 +42,9 @@
     return userLectures;
 }
 
-//-(NSArray*)getLecturesOfDay:(id)user lectures:(NSArray *)lectures currentWeek:(NSUInteger)currentWeek {}
+/*-(NSArray*)getLecturesOfDay:(id)user
+                   lectures:(NSArray *)lectures
+                currentWeek:(NSUInteger)currentWeek {}*/
 
 -(NSDictionary*)getLecturesPerDays:(NSArray *)lectures {
     NSDictionary* lecturesDays = [NSMutableDictionary dictionaryWithObjectsAndKeys:

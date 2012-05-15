@@ -54,7 +54,9 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     NSError* error;
-    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:NULL error:&error];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:NULL
+                                                     error:&error];
     if(!data) {
         NSLog(@"FAILED: %@", [error localizedDescription]);
         return nil;
@@ -100,7 +102,9 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     NSError* error;
-    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:NULL error:&error];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:NULL
+                                                     error:&error];
     if(!data) {
         NSLog(@"FAILED: %@", [error localizedDescription]);
         return nil;
@@ -142,7 +146,9 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     [request addValue:contentType forHTTPHeaderField:@"Content-Type"];
     
     NSError* error;
-    NSData* data = [NSURLConnection sendSynchronousRequest:request returningResponse:NULL error:&error];
+    NSData* data = [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:NULL
+                                                     error:&error];
     if(!data) {
         NSLog(@"FAILED: %@", [error localizedDescription]);
         return nil;

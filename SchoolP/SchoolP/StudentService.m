@@ -15,7 +15,8 @@
 }
 
 -(id) asDictionary {
-    return [NSDictionary dictionaryWithObjectsAndKeys:self.firstName, @"name", 
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            self.firstName, @"name", 
             self.lastName, @"lastname", 
             self.mailAddress, @"mailaddress", 
             self.phoneNumber, @"phonenumber",

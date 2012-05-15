@@ -97,10 +97,9 @@
 		06EFCE3115594F4F00498776 /* SchoolP */ = {
 			isa = PBXGroup;
 			children = (
+				06EFCE3215594F4F00498776 /* main.m */,
 				06EFCE3E1559501100498776 /* Service */,
 				06EFCE3D1559500A00498776 /* Model */,
-				06EFCE3215594F4F00498776 /* main.m */,
-				06EFCE3615594F4F00498776 /* SchoolP.1 */,
 				06EFCE3415594F4F00498776 /* Supporting Files */,
 			);
 			path = SchoolP;
@@ -109,6 +108,7 @@
 		06EFCE3415594F4F00498776 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				06EFCE3615594F4F00498776 /* SchoolP.1 */,
 				06EFCE3515594F4F00498776 /* SchoolP-Prefix.pch */,
 			);
 			name = "Supporting Files";

@@ -9,9 +9,17 @@
 //@property (nonatomic, copy) NSArray *courses;
 
 
-+(id) studentWithName: (NSString *)name lastName: (NSString *) lastName mailAddress: (NSString *)mailAddress phoneNumber: (NSString *) phoneNumber courses: (NSDictionary *) courses;
++(id) studentWithName: (NSString *)name
+             lastName: (NSString *)lastName
+          mailAddress: (NSString *)mailAddress
+          phoneNumber: (NSString *)phoneNumber
+              courses: (NSDictionary *)courses;
 
--(id) initWithStudentName: (NSString *)name lastName: (NSString *) lastName mailAddress: (NSString *)mailAddress phoneNumber: (NSString *) phoneNumber courses: (NSDictionary *) courses;
+-(id) initWithStudentName: (NSString *)name
+                 lastName: (NSString *)lastName
+              mailAddress: (NSString *)mailAddress
+              phoneNumber: (NSString *)phoneNumber
+                  courses: (NSDictionary *)courses;
 
 -(NSMutableArray*)courses;
 
