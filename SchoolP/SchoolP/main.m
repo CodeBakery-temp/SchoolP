@@ -3,14 +3,29 @@
 #import "Student.h"
 #import "StudentService.h"
 #import "DBService.h"
+#import "LoginService.h"
 
 int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
         NSLog(@"___________START");
+        
+        /*
+        //////TO GET ONE USER FROM LOGIN START//////
+        DBService* db = [DBService createDatabase]; 
+        
+        NSMutableDictionary* usersInADic = [NSMutableDictionary dictionaryWithDictionary:[db getUsers]];
+        
+        LoginService* userLogin = [LoginService withUserDictionary:usersInADic];
+        Student* user = [userLogin checkLogin:usersInADic];
+        NSLog(@"User object gotten from login service to main and thus logged: \n %@", user);
+        //////TO GET ONE USER FROM LOGIN STOP//////
+        */
+        
 
-        /* // Databas anrop
+        /*
+        // Databas anrop
         DBService* db = [DBService database];
         ScheduleService* schedule = [ScheduleService schedule];
         
