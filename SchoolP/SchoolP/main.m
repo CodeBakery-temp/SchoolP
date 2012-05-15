@@ -2,8 +2,10 @@
 #import "Admin.h"
 #import "Student.h"
 #import "StudentService.h"
+#import "ScheduleService.h"
 #import "DBService.h"
 #import "LoginService.h"
+#import "Lecture.h"
 
 int main(int argc, const char * argv[])
 {
@@ -11,19 +13,37 @@ int main(int argc, const char * argv[])
     @autoreleasepool {
         NSLog(@"___________START");
         
-        /*
-        //////TO GET ONE USER FROM LOGIN START//////
-        DBService* db = [DBService createDatabase]; 
         
+        //////TO GET ONE USER FROM LOGIN START//////
+        DBService* db = [DBService database];
+        ScheduleService* schedule = [ScheduleService schedule];
+        
+        // DATE
+        NSDate *date = [NSDate date];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSInteger units = NSWeekCalendarUnit;
+        NSDateComponents *components = [calendar components:units fromDate:date];
+        
+        // LOGIN
         NSMutableDictionary* usersInADic = [NSMutableDictionary dictionaryWithDictionary:[db getUsers]];
         
         LoginService* userLogin = [LoginService withUserDictionary:usersInADic];
         Student* user = [userLogin checkLogin:usersInADic];
-        NSLog(@"User object gotten from login service to main and thus logged: \n %@", user);
+        NSLog(@"User logged in: \n %@", user);
         //////TO GET ONE USER FROM LOGIN STOP//////
-        */
         
-
+        // GET SCHEMA
+        NSArray* lectures = [db getLectures];
+        NSArray* weekLectures = [schedule getLecturesOfWeek:user lectures:lectures currentWeek:[components week]];
+        NSDictionary* lecturesPerDays = [schedule getLecturesPerDays:weekLectures];
+        
+        [schedule printWeek:lecturesPerDays];
+        
+        
+        
+        
+        
+        
         /*
         // Databas anrop
         DBService* db = [DBService database];

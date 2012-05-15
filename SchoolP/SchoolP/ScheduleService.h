@@ -10,4 +10,7 @@
 //-(NSArray*)getLecturesOfDay:(id)user lectures: (NSArray *) lectures currentWeek: (NSUInteger) currentWeek;
 
 -(NSDictionary*)getLecturesPerDays:(NSArray *)lectures;
+
+-(void)printWeek:(NSDictionary*) lecturesWeek;
+
 @end

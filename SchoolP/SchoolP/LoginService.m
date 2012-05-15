@@ -26,7 +26,7 @@
 
 -(Student*) checkLogin: (NSDictionary *) dic
 {
-    BOOL* state = TRUE;
+    BOOL state = TRUE;
     while (state) {
         
         NSLog(@"Mail adresss tack");

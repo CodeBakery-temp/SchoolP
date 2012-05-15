@@ -24,4 +24,6 @@
 
 -(NSMutableArray *)weeks;
 
+-(void)printLecture;
+
 @end

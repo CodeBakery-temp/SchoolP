@@ -62,4 +62,9 @@
     return [NSString stringWithFormat:@"\nCourse: %@, \nGrade: %@, \nTeacher: %@, \nRoom: %@, \nCourseID: %@, \nTime: %@-%@, \nLunch: %@-%@, \nYear: %@, \nDays: %@ \nWeeks: %@", self.course, self.grade, self.teacher, self.room, self.courseID, self.startTime, self.stopTime, self.lunchStart, self.lunchStop, self.year, [lessonDays componentsJoinedByString:@", "], [lessonWeeks componentsJoinedByString:@", "]];
 }
 
+-(void)printLecture {
+    NSLog(@"________________________________________________");
+    NSLog(@"\nCourse: %@, %@, \nTeacher: %@, \nRoom: %@, \nCourseID: %@, \nTime: %@-%@, \nLunch: %@-%@, \nYear: %@, \n", self.course, self.grade, self.teacher, self.room, self.courseID, self.startTime, self.stopTime, self.lunchStart, self.lunchStop, self.year);
+}
+
 @end

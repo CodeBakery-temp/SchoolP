@@ -23,15 +23,16 @@
 
 
 -(NSArray*)getLecturesOfWeek:(id)user lectures:(NSArray *)lectures currentWeek: (NSUInteger) currentWeek {
-    NSLog(@"%lu", currentWeek);
-    NSLog(@"%@", [user mailAddress]);
+    //NSLog(@"WEEK %lu", currentWeek);
+    //NSLog(@"USER %@", [user mailAddress]);
+    //NSLog(@"LECTURES %@", lectures);
     NSMutableArray* userLectures = [NSMutableArray array];
     for(NSString* courseID in [user courses]) {                                              // loop every student's courses
         for(id lecture in lectures) {                                                   // loop every school course
             if([courseID isEqualTo:[lecture courseID]]) {                                       // if course is on student's list
                 for(NSString* week in [lecture weeks]) {                                        // loop all weeks course is   
                     if([week isEqualTo:[NSString stringWithFormat:@"%d", currentWeek]]) {       // if course is within current week
-                        NSLog(@"%@, %@", [user firstName], [lecture course]);
+                        //NSLog(@"%@, %@", [user firstName], [lecture course]);
                         [userLectures addObject:lecture];
                     }      
                 }
@@ -62,7 +63,29 @@
         }
     }
     return lecturesDays;
-    
+}
+
+-(void)printWeek:(NSDictionary*) lecturesWeek {
+    NSLog(@"MONDAY");
+    for(Lecture* lec in [lecturesWeek objectForKey:@"MONDAY"]) {
+        [lec printLecture];
+    }
+    NSLog(@"TUESDAY");
+    for(Lecture* lec in [lecturesWeek objectForKey:@"TUESDAY"]) {
+        [lec printLecture];
+    }
+    NSLog(@"WEDNESDAY");
+    for(Lecture* lec in [lecturesWeek objectForKey:@"WEDNESDAY"]) {
+        [lec printLecture];
+    }
+    NSLog(@"THURSDAY");
+    for(Lecture* lec in [lecturesWeek objectForKey:@"THURSDAY"]) {
+        [lec printLecture];
+    }
+    NSLog(@"FRIDAY");
+    for(Lecture* lec in [lecturesWeek objectForKey:@"FRIDAY"]) {
+        [lec printLecture];
+    }
 }
 
 @end
