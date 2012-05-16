@@ -67,6 +67,7 @@
     return lecturesDays;
 }
 
+
 -(void)printWeek:(NSDictionary*) lecturesWeek {
     NSLog(@"MONDAY");
     for(Lecture* lec in [lecturesWeek objectForKey:@"MONDAY"]) {
