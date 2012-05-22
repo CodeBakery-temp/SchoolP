@@ -5,6 +5,7 @@
 #import "DBService.h"
 #import "LoginService.h"
 #import "Lecture.h"
+#import "Menu.h"
 
 int main(int argc, const char * argv[])
 {
@@ -12,7 +13,11 @@ int main(int argc, const char * argv[])
     @autoreleasepool {
         NSLog(@"___________START");
         
+        [Menu menu];
         
+        
+        
+        /*
         //////TO GET ONE USER FROM LOGIN START//////
         DBService* db = [DBService database];
         ScheduleService* schedule = [ScheduleService schedule];
@@ -41,12 +46,13 @@ int main(int argc, const char * argv[])
         NSArray* allYourNotes = [schedule getNotesOfWeek:user notes:notes currentWeek:[components week]];
         NSDictionary* notesSorted = [schedule getNotesPerDays:allYourNotes];
         [schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];            
-        /*
+        
          // Notification
          NSString * myMessage = [NSString stringWithFormat:@"%@ %@ (phonenumer: %@), you are late! A copy was sent to you're mail: %@", studentIM.firstName, studentIM.lastName, studentIM.phoneNumber, studentIM.mailAddress];
         NSDictionary * dict = [NSDictionary dictionaryWithObject:myMessage forKey: admin.firstName];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendMessage" object: studentIM
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"sendMessage" 
+                                                            object:studentIM
                                                           userInfo:dict];
          */
         

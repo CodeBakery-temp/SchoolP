@@ -1,4 +1,5 @@
 #import "Student.h"
+#import "Menu.h"
 
 @implementation Student
 {

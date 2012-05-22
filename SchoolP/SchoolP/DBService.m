@@ -4,6 +4,7 @@
 #import "Student.h"
 #import "Lecture.h"
 #import "Message.h"
+#import "Menu.h"
 
 NSString *const usersDB = @"http://you.iriscouch.com/schoolp-users/";
 NSString *const lecturesDB = @"http://you.iriscouch.com/schoolp-schedules/";

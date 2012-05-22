@@ -1,4 +1,5 @@
 #import "Admin.h"
+#import "Menu.h"
 
 @implementation Admin 
 {
