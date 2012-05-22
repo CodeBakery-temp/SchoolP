@@ -2,6 +2,9 @@
 #import "Admin.h"
 #import "Student.h"
 #import "Lecture.h"
+#import "DBService.h"
+#import "Note.h"
+#import "Message.h"
 
 @implementation ScheduleService
 
@@ -42,9 +45,7 @@
     return userLectures;
 }
 
-/*-(NSArray*)getLecturesOfDay:(id)user
-                   lectures:(NSArray *)lectures
-                currentWeek:(NSUInteger)currentWeek {}*/
+
 
 -(NSDictionary*)getLecturesPerDays:(NSArray *)lectures {
     NSDictionary* lecturesDays = [NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -67,6 +68,101 @@
     return lecturesDays;
 }
 
+-(NSSet*)getLecturesOfDay:(id)user {
+    NSDate *date = [NSDate date];
+    NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
+    [weekDay setDateFormat:@"EEEE"];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSWeekCalendarUnit fromDate:date];
+    
+    NSSet* lecturesOfDay;
+    if(!lecturesOfDay) {
+        DBService* db = [DBService database];
+        NSArray* lectures = [db getLectures];   // get all lectures
+        NSArray* weekLectures = [self getLecturesOfWeek:user lectures:lectures currentWeek:[components week]];
+        lecturesOfDay = [[self getLecturesPerDays:weekLectures]objectForKey:[[weekDay stringFromDate:date] uppercaseString]];
+    }
+    return lecturesOfDay;
+}
+
+-(NSArray*)getNotesOfWeek:(id)user notes:(NSArray *)notes currentWeek:(NSUInteger)currentWeek {
+    NSMutableArray* userNotes = [NSMutableArray array];
+    for(id course in [user courses]) {
+        for(Note* note in notes) {
+            if([[note courseID]isEqualTo:course]) {
+                [userNotes addObject:note];
+            }
+        }
+    }
+    return userNotes;
+}
+
+-(NSDictionary*)getNotesPerDays:(NSArray *)notes {
+    NSDictionary* notesDays = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                               [NSMutableArray array], @"MONDAY",
+                               [NSMutableArray array], @"TUESDAY",
+                               [NSMutableArray array], @"WEDNESDAY",
+                               [NSMutableArray array], @"THURSDAY",
+                               [NSMutableArray array], @"FRIDAY",nil];
+    for(NSArray* day in notesDays) {
+        for(Note* note in notes) {
+            if(![[note day]caseInsensitiveCompare:[NSString stringWithFormat:@"%@", day]]) {
+                [[notesDays objectForKey:day] addObject:note];
+            }
+        }
+    }
+    return notesDays;
+}
+
+-(void)printLecturesWithNotes:(NSDictionary *)lectures notes:(NSDictionary *)notes {
+    NSLog(@"MONDAY");
+    for(Lecture* lecture in [lectures objectForKey:@"MONDAY"]) {
+        NSLog(@"%@", [lecture course]);
+        for(Note* note in [notes objectForKey:@"MONDAY"]) {
+            if([[lecture courseID]isEqualTo:[note courseID]]) {
+                NSLog(@"%@", [note text]);
+            }
+        }
+    }
+    NSLog(@"TUESDAY");
+    for(Lecture* lecture in [lectures objectForKey:@"TUESDAY"]) {
+        NSLog(@"%@", [lecture course]);
+        for(Note* note in [notes objectForKey:@"TUESDAY"]) {
+            if([[lecture courseID]isEqualTo:[note courseID]]) {
+                NSLog(@"%@", [note text]);
+            }
+        }
+    }
+    NSLog(@"WEDNESDAY");
+    for(Lecture* lecture in [lectures objectForKey:@"WEDNESDAY"]) {
+        NSLog(@"%@", [lecture course]);
+        for(Note* note in [notes objectForKey:@"WEDNESDAY"]) {
+            if([[lecture courseID]isEqualTo:[note courseID]]) {
+                NSLog(@"%@", [note text]);
+            }
+        }
+    }
+    NSLog(@"THURSDAY");
+    for(Lecture* lecture in [lectures objectForKey:@"THURSDAY"]) {
+        NSLog(@"%@", [lecture course]);
+        for(Note* note in [notes objectForKey:@"THURSDAY"]) {
+            if([[lecture courseID]isEqualTo:[note courseID]]) {
+                NSLog(@"%@", [note text]);
+            }
+        }
+    }
+    NSLog(@"FRIDAY");
+    for(Lecture* lecture in [lectures objectForKey:@"FRIDAY"]) {
+        NSLog(@"%@", [lecture course]);
+        for(Note* note in [notes objectForKey:@"FRIDAY"]) {
+            if([[lecture courseID]isEqualTo:[note courseID]]) {
+                NSLog(@"%@", [note text]);
+            }
+        }
+    }
+    
+}
 
 -(void)printWeek:(NSDictionary*) lecturesWeek {
     NSLog(@"MONDAY");

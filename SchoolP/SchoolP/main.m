@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "Admin.h"
 #import "Student.h"
-#import "StudentService.h"
 #import "ScheduleService.h"
 #import "DBService.h"
 #import "LoginService.h"
@@ -34,14 +33,14 @@ int main(int argc, const char * argv[])
         
         // GET SCHEMA
         NSArray* lectures = [db getLectures];
-        NSArray* weekLectures = [schedule getLecturesOfWeek:user lectures:lectures currentWeek:[components week]];
-        NSDictionary* lecturesPerDays = [schedule getLecturesPerDays:weekLectures];
+        NSArray* allYourLectures = [schedule getLecturesOfWeek:user lectures:lectures currentWeek:[components week]];
+        NSDictionary* lecturesSorted = [schedule getLecturesPerDays:allYourLectures];
         
-        [schedule printWeek:lecturesPerDays];
-
-        
-        
-            
+        // GET NOTES
+        NSArray* notes = [[db getNotifications]objectForKey:@"NOTES"];
+        NSArray* allYourNotes = [schedule getNotesOfWeek:user notes:notes currentWeek:[components week]];
+        NSDictionary* notesSorted = [schedule getNotesPerDays:allYourNotes];
+        [schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];            
         /*
          // Notification
          NSString * myMessage = [NSString stringWithFormat:@"%@ %@ (phonenumer: %@), you are late! A copy was sent to you're mail: %@", studentIM.firstName, studentIM.lastName, studentIM.phoneNumber, studentIM.mailAddress];

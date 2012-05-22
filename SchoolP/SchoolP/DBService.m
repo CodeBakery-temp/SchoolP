@@ -2,8 +2,8 @@
 #import "DBService.h"
 #import "Admin.h"
 #import "Student.h"
-#import "StudentService.h"
 #import "Lecture.h"
+#import "Message.h"
 
 NSString *const usersDB = @"http://you.iriscouch.com/schoolp-users/";
 NSString *const lecturesDB = @"http://you.iriscouch.com/schoolp-schedules/";
@@ -154,27 +154,30 @@ NSString *const getAll = @"_all_docs?include_docs=true";
         return nil;
     }
     else {
-        NSMutableDictionary *usersDic = [NSJSONSerialization 
-                                         JSONObjectWithData:data 
-                                         options:NSJSONReadingMutableContainers 
-                                         error:NULL];
+        NSMutableDictionary *noticesDic = [NSJSONSerialization 
+                                           JSONObjectWithData:data 
+                                           options:NSJSONReadingMutableContainers 
+                                           error:NULL];
         
-        usersDic = [usersDic objectForKey:@"rows"]; // Step into 'rows'
-        for (NSDictionary *object in usersDic) {    // Step into JSON array (single index)
+        noticesDic = [noticesDic objectForKey:@"rows"]; // Step into 'rows'
+        for (NSDictionary *object in noticesDic) {    // Step into JSON array (single index)
             NSDictionary* dict = [object objectForKey:@"doc"]; // Step into 'doc' (current object key/values)
             //NSLog(@"OBJECT: %@", [dict allKeys]);
-            if([[dict objectForKey:@"admin"]isEqualToString:@"0"]) {
+            if([[dict objectForKey:@"type"]isEqualToString:@"note"]) {
                 Note* note = [Note noteWithText:[dict objectForKey:@"text"] 
                                            week:[dict objectForKey:@"week"] 
                                             day:[dict objectForKey:@"day"] 
                                        courseID:[dict objectForKey:@"courseID"]];
                 [[notifications objectForKey:@"NOTES"] addObject:note];
             }
-            else {
-                //////////////MESSAGES BUILDS HERE////////////////
+            else if ([[dict objectForKey:@"type"]isEqualToString:@"message"]){
+                Message* message = [Message messageWithSender:[dict objectForKey:@"sender"] 
+                                                     receiver:[dict objectForKey:@"receiver"] 
+                                                         text:[dict objectForKey:@"text"]];
+                [[notifications objectForKey:@"MESSAGES"] addObject:message];
             }
         }
-        return users;
+        return notifications;
     }
 }
 

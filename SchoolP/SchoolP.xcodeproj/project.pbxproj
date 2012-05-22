@@ -10,13 +10,13 @@
 		067575E11560EE9500FBCCB9 /* Lecture.m in Sources */ = {isa = PBXBuildFile; fileRef = 067575E01560EE9500FBCCB9 /* Lecture.m */; };
 		067575E51560EF3100FBCCB9 /* ScheduleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 067575E41560EF3100FBCCB9 /* ScheduleService.m */; };
 		067575E81560F11100FBCCB9 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 067575E71560F11100FBCCB9 /* Note.m */; };
+		067BE31C156B70A0001BB461 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 067BE31B156B70A0001BB461 /* Message.m */; };
 		06EFCE3015594F4F00498776 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EFCE2F15594F4F00498776 /* Foundation.framework */; };
 		06EFCE3315594F4F00498776 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE3215594F4F00498776 /* main.m */; };
 		06EFCE3715594F4F00498776 /* SchoolP.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06EFCE3615594F4F00498776 /* SchoolP.1 */; };
 		06EFCE411559502400498776 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE401559502400498776 /* Student.m */; };
 		06EFCE441559506800498776 /* Admin.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE431559506800498776 /* Admin.m */; };
 		06EFCE4A155950CF00498776 /* DBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE49155950CF00498776 /* DBService.m */; };
-		06EFCE4D1559510000498776 /* StudentService.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE4C1559510000498776 /* StudentService.m */; };
 		E7F81EA415624F86009E96F5 /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F81EA315624F86009E96F5 /* LoginService.m */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +40,8 @@
 		067575E41560EF3100FBCCB9 /* ScheduleService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleService.m; sourceTree = "<group>"; };
 		067575E61560F11100FBCCB9 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		067575E71560F11100FBCCB9 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		067BE31A156B70A0001BB461 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		067BE31B156B70A0001BB461 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		06EFCE2B15594F4F00498776 /* SchoolP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SchoolP; sourceTree = BUILT_PRODUCTS_DIR; };
 		06EFCE2F15594F4F00498776 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		06EFCE3215594F4F00498776 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -51,8 +53,6 @@
 		06EFCE431559506800498776 /* Admin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Admin.m; sourceTree = "<group>"; };
 		06EFCE48155950CF00498776 /* DBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBService.h; sourceTree = "<group>"; };
 		06EFCE49155950CF00498776 /* DBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBService.m; sourceTree = "<group>"; };
-		06EFCE4B1559510000498776 /* StudentService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentService.h; sourceTree = "<group>"; };
-		06EFCE4C1559510000498776 /* StudentService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentService.m; sourceTree = "<group>"; };
 		E7F81EA215624F86009E96F5 /* LoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		E7F81EA315624F86009E96F5 /* LoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +125,8 @@
 				067575E01560EE9500FBCCB9 /* Lecture.m */,
 				067575E61560F11100FBCCB9 /* Note.h */,
 				067575E71560F11100FBCCB9 /* Note.m */,
+				067BE31A156B70A0001BB461 /* Message.h */,
+				067BE31B156B70A0001BB461 /* Message.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -134,8 +136,6 @@
 			children = (
 				06EFCE48155950CF00498776 /* DBService.h */,
 				06EFCE49155950CF00498776 /* DBService.m */,
-				06EFCE4B1559510000498776 /* StudentService.h */,
-				06EFCE4C1559510000498776 /* StudentService.m */,
 				067575E31560EF3100FBCCB9 /* ScheduleService.h */,
 				067575E41560EF3100FBCCB9 /* ScheduleService.m */,
 				E7F81EA215624F86009E96F5 /* LoginService.h */,
@@ -199,11 +199,11 @@
 				06EFCE411559502400498776 /* Student.m in Sources */,
 				06EFCE441559506800498776 /* Admin.m in Sources */,
 				06EFCE4A155950CF00498776 /* DBService.m in Sources */,
-				06EFCE4D1559510000498776 /* StudentService.m in Sources */,
 				067575E11560EE9500FBCCB9 /* Lecture.m in Sources */,
 				067575E51560EF3100FBCCB9 /* ScheduleService.m in Sources */,
 				067575E81560F11100FBCCB9 /* Note.m in Sources */,
 				E7F81EA415624F86009E96F5 /* LoginService.m in Sources */,
+				067BE31C156B70A0001BB461 /* Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
