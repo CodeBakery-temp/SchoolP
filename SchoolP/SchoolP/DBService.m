@@ -44,6 +44,124 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     return self;
 }
 
++(void) postToDatabase:(NSString *) urlAdress sourcePath:(NSString *)theSource{
+    
+    //prepar request
+    NSString *urlString = [NSString stringWithString: urlAdress];
+    //@"http://127.0.0.1:5984/users"];
+    //@"http://Zephyr:zephyr@zephyr.iriscouch.com/schoolp-notifications"];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    
+    //set headers
+    NSString *contentType = [NSString stringWithFormat:@"application/json"];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    //create the body
+    NSMutableData *postBody = [NSMutableData data];
+    
+    [postBody appendData:[NSData dataWithContentsOfFile:theSource]];
+    //@"/Users/DQF/Desktop/CodeBakery/JSON/Glen.json"
+    
+    //post
+    [request setHTTPBody:postBody];
+    
+    //get response
+    NSHTTPURLResponse* urlResponse = nil;  
+    NSError *error = [[NSError alloc] init];  
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];  
+    NSString *result = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response Code: %ld", [urlResponse statusCode]);
+    if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300) {
+        NSLog(@"Response: %@", result);
+        
+        //here you get the response
+    }
+}
+
++(void) lectureToDataBase:(NSDictionary *)dictionary{
+    NSData *tempData;
+    
+    if([NSJSONSerialization isValidJSONObject:dictionary])
+    {
+        tempData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                   options:NSJSONWritingPrettyPrinted
+                                                     error:NULL];
+    }
+    //prepar request
+    NSString *urlString = [NSString stringWithString: lecturesDB];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    
+    //set headers
+    NSString *contentType = [NSString stringWithFormat:@"application/json"];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    //create the body
+    NSMutableData *postBody = [NSMutableData data];
+    
+    [postBody appendData:tempData];
+    //@"/Users/DQF/Desktop/CodeBakery/JSON/Glen.json"
+    
+    //post
+    [request setHTTPBody:postBody];
+    
+    //get response
+    NSHTTPURLResponse* urlResponse = nil;  
+    NSError *error = [[NSError alloc] init];  
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];  
+    NSString *result = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response Code: %ld", [urlResponse statusCode]);
+    if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300) {
+        NSLog(@"Response: %@", result);
+        
+        //here you get the response
+    }
+}
+
+
++(void) noteficationToDataBase:(NSDictionary *)dictionary{
+    NSData *tempData;
+    
+    if([NSJSONSerialization isValidJSONObject:dictionary])
+    {
+        tempData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                   options:NSJSONWritingPrettyPrinted
+                                                     error:NULL];
+    }
+    //prepar request
+    NSString *urlString = [NSString stringWithString: notificationsDB];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"POST"];
+    
+    //set headers
+    NSString *contentType = [NSString stringWithFormat:@"application/json"];
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+    //create the body
+    NSMutableData *postBody = [NSMutableData data];
+    
+    [postBody appendData:tempData];
+    //@"/Users/DQF/Desktop/CodeBakery/JSON/Glen.json"
+    
+    //post
+    [request setHTTPBody:postBody];
+    
+    //get response
+    NSHTTPURLResponse* urlResponse = nil;  
+    NSError *error = [[NSError alloc] init];  
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];  
+    NSString *result = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"Response Code: %ld", [urlResponse statusCode]);
+    if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300) {
+        NSLog(@"Response: %@", result);
+        
+        //here you get the response
+    }
+}
 
 -(NSDictionary*)getUsers {
     NSString* urlString = [NSString stringWithFormat:@"%@%@", usersDB, getAll];
@@ -125,12 +243,14 @@ NSString *const getAll = @"_all_docs?include_docs=true";
                                                   room:[dict objectForKey:@"room"]
                                               courseID:[dict objectForKey:@"courseID"] 
                                              startTime:[dict objectForKey:@"startTime"] 
-                                              stopTime:[dict objectForKey:@"endTime"] 
+                                              stopTime:[dict objectForKey:@"stopTime"] 
                                             lunchStart:[dict objectForKey:@"lunchStart"] 
                                              lunchStop:[dict objectForKey:@"lunchStop"]
                                                   year:[dict objectForKey:@"year"]
                                             daysOfWeek:[dict objectForKey:@"daysOfWeek"]
-                                                 weeks:[dict objectForKey:@"weeks"]];
+                                                 weeks:[dict objectForKey:@"weeks"]
+                                             couchDBId:[dict objectForKey:@"couchDBId"] 
+                                            couchDBRev:[dict objectForKey:@"couchDBRev"]];
             
             [lectures addObject:lecture];
         }

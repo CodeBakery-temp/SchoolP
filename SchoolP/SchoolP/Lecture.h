@@ -2,6 +2,9 @@
 
 @interface Lecture : NSObject
 
+@property (nonatomic, copy) NSString *couchDBId;
+@property (nonatomic, copy) NSString *couchDBRev;
+
 @property (nonatomic, copy) NSString *course;
 @property (nonatomic, copy) NSString *grade;
 @property (nonatomic, copy) NSString *teacher;
@@ -18,8 +21,8 @@
 
 + (id) courseWithName: (NSString *)course
                 grade: (NSString *)grade
-              teacher: (NSString*)teacher
-                 room: (NSString*)room
+              teacher: (NSString *)teacher
+                 room: (NSString *)room
              courseID: (NSString *)courseID
             startTime: (NSString *)startTime
              stopTime: (NSString *)stopTime
@@ -27,12 +30,14 @@
             lunchStop: (NSString *)lunchStop
                  year: (NSString *)year
            daysOfWeek: (NSArray *)daysOfWeek
-                weeks: (NSArray *)weeks;
+                weeks: (NSArray *)weeks 
+            couchDBId: (NSString *) couchDBId
+           couchDBRev: (NSString *) couchDBRev;
 
 - (id) initCourseWithName: (NSString *)course
                     grade: (NSString *)grade
-                  teacher: (NSString*)teacher
-                     room: (NSString*)room
+                  teacher: (NSString *)teacher
+                     room: (NSString *)room
                  courseID: (NSString *)courseID
                 startTime: (NSString *)startTime
                  stopTime: (NSString *)stopTime
@@ -40,7 +45,11 @@
                 lunchStop: (NSString *)lunchStop
                      year: (NSString *)year
                daysOfWeek: (NSArray *)daysOfWeek
-                    weeks: (NSArray *)weeks ;
+                    weeks: (NSArray *)weeks 
+                couchDBId: (NSString *) couchDBId
+               couchDBRev: (NSString *) couchDBRev;
+
+-(id) asDictionary;
 
 -(NSMutableArray *)daysOfWeek;
 

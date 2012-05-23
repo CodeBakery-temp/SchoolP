@@ -51,6 +51,8 @@ int main(int argc, const char * argv[])
          NSString * myMessage = [NSString stringWithFormat:@"%@ %@ (phonenumer: %@), you are late! A copy was sent to you're mail: %@", studentIM.firstName, studentIM.lastName, studentIM.phoneNumber, studentIM.mailAddress];
         NSDictionary * dict = [NSDictionary dictionaryWithObject:myMessage forKey: admin.firstName];
         
+         
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"sendMessage" 
                                                             object:studentIM
                                                           userInfo:dict];

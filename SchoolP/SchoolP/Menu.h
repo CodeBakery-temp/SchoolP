@@ -11,7 +11,7 @@
 
 @property (nonatomic) int menu;
 
--(id) initWithMenu : (int) menu;
+-(id) initMenu : (int) menu;
 +(void) menu;
 
 @end
