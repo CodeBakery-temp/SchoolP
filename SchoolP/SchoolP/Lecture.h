@@ -10,6 +10,7 @@
 @property (nonatomic, copy) NSString *teacher;
 @property (nonatomic, copy) NSString *room;
 @property (nonatomic, copy) NSString *courseID;
+@property (nonatomic, copy) NSString *version;
 @property (nonatomic, copy) NSString *startTime;
 @property (nonatomic, copy) NSString *stopTime;
 @property (nonatomic, copy) NSString *lunchStart;
@@ -24,6 +25,7 @@
               teacher: (NSString *)teacher
                  room: (NSString *)room
              courseID: (NSString *)courseID
+              version: (NSString *)version
             startTime: (NSString *)startTime
              stopTime: (NSString *)stopTime
            lunchStart: (NSString *)lunchStart
@@ -39,6 +41,7 @@
                   teacher: (NSString *)teacher
                      room: (NSString *)room
                  courseID: (NSString *)courseID
+                  version: (NSString *)version
                 startTime: (NSString *)startTime
                  stopTime: (NSString *)stopTime
                lunchStart: (NSString *)lunchStart
@@ -49,7 +52,7 @@
                 couchDBId: (NSString *) couchDBId
                couchDBRev: (NSString *) couchDBRev;
 
--(id) asDictionary;
+-(NSDictionary*) asDictionary;
 
 -(NSMutableArray *)daysOfWeek;
 

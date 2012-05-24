@@ -20,6 +20,13 @@
 
 -(NSDictionary*)getNotesPerDays:(NSArray *)notes;
 
+// TEST
+-(void)updateLectureTemplate:(NSString*)courseID lectures:(NSArray*) lectures jsonPath:(NSString*)jsonPath;
+-(void)updateLectureEvent:(NSString*)courseID version:(NSString*)version lectures:(NSArray*) lectures jsonPath:(NSString*)jsonPath;
+// APP
+-(void)updateLectureTemplate:(id)lecture;
+-(void)updateLectureEvent:(id)lecture;
+
 -(void)printLecturesWithNotes:(NSDictionary*)lectures notes:(NSDictionary*)notes;
 
 -(void)printWeek:(NSDictionary*) lecturesWeek;

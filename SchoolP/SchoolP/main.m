@@ -20,14 +20,37 @@ int main(int argc, const char * argv[])
         /*
         //////TO GET ONE USER FROM LOGIN START//////
         DBService* db = [DBService database];
-        ScheduleService* schedule = [ScheduleService schedule];
-        
+        ScheduleService* schedule = [ScheduleService schedule];*/
+        /*
         // DATE
         NSDate *date = [NSDate date];
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSInteger units = NSWeekCalendarUnit;
-        NSDateComponents *components = [calendar components:units fromDate:date];
-        
+        NSDateComponents *components = [calendar components:units fromDate:date];*/
+         /*
+        NSArray* lectures = [db getLectures];
+        [schedule updateLectureEvent:@"1" version:@"2" lectures:lectures jsonPath:@"/Users/username/Desktop/lecture.json"];*/
+        /* Write JSON like this
+         {
+         "daysOfWeek": [
+         "Thursday",
+         "Friday"
+         ],
+         "course": "Objective-C",
+         "courseID": "1",
+         "stopTime": "16:00",
+         "grade": "YhApp",
+         "lunchStart": "12:00",
+         "lunchStop": "13:00",
+         "startTime": "09:00",
+         "weeks": [
+         "21"
+         ],
+         "year": "2012",
+         "teacher": "matssod@gmail.com",
+         "room": "2010"
+         }*/
+        /*
         // LOGIN
         NSMutableDictionary* usersInADic = [NSMutableDictionary dictionaryWithDictionary:[db getUsers]];
         

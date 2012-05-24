@@ -44,9 +44,14 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     return self;
 }
 
+/*********************************************************************
+ METHOD : POST DATA TO DATABASE - DIRECT SOURCE TO DATABASE PATH
+ ACCEPTS: NSString URL to database, NSString PATH to JSON DATA    
+ RETURNS: NONE
+ *********************************************************************/
 +(void) postToDatabase:(NSString *) urlAdress sourcePath:(NSString *)theSource{
     
-    //prepar request
+    //prepare request
     NSString *urlString = [NSString stringWithString: urlAdress];
     //@"http://127.0.0.1:5984/users"];
     //@"http://Zephyr:zephyr@zephyr.iriscouch.com/schoolp-notifications"];
@@ -80,6 +85,11 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     }
 }
 
+/*********************************************************************
+ METHOD : POST LECTURE OBJECT TO LECTURE DATABASE
+ ACCEPTS: Lecture object as NSDictionary    
+ RETURNS: NONE
+ *********************************************************************/
 +(void) lectureToDataBase:(NSDictionary *)dictionary{
     NSData *tempData;
     
@@ -121,7 +131,11 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     }
 }
 
-
+/*********************************************************************
+ METHOD : POST NOTE OR MESSAGE OBJECT TO NOTIFICATION DATABASE
+ ACCEPTS: Note or Message object as NSDictionary    
+ RETURNS: NONE
+ *********************************************************************/
 +(void) noteficationToDataBase:(NSDictionary *)dictionary{
     NSData *tempData;
     
@@ -131,7 +145,7 @@ NSString *const getAll = @"_all_docs?include_docs=true";
                                                    options:NSJSONWritingPrettyPrinted
                                                      error:NULL];
     }
-    //prepar request
+    //prepare request
     NSString *urlString = [NSString stringWithString: notificationsDB];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
@@ -158,11 +172,15 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     NSLog(@"Response Code: %ld", [urlResponse statusCode]);
     if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300) {
         NSLog(@"Response: %@", result);
-        
         //here you get the response
     }
 }
 
+/*********************************************************************
+ METHOD : GET ALL USER OBJECTS FROM USERS DATABASE
+ ACCEPTS: NONE    
+ RETURNS: NSDictionary with lists of Student and Admin objects
+ *********************************************************************/
 -(NSDictionary*)getUsers {
     NSString* urlString = [NSString stringWithFormat:@"%@%@", usersDB, getAll];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
@@ -211,6 +229,11 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     }
 }
 
+/*********************************************************************
+ METHOD : GET ALL LECTURE OBJECTS FROM LECTURE DATABASE
+ ACCEPTS: NONE    
+ RETURNS: NSMutableArray list with Lecture objects
+ *********************************************************************/
 -(NSMutableArray*)getLectures {
     NSString* urlString = [NSString stringWithFormat:@"%@%@", lecturesDB, getAll];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
@@ -241,7 +264,8 @@ NSString *const getAll = @"_all_docs?include_docs=true";
                                                  grade:[dict objectForKey:@"grade"]
                                                teacher:[dict objectForKey:@"teacher"] 
                                                   room:[dict objectForKey:@"room"]
-                                              courseID:[dict objectForKey:@"courseID"] 
+                                              courseID:[dict objectForKey:@"courseID"]
+                                               version:[dict objectForKey:@"version"]
                                              startTime:[dict objectForKey:@"startTime"] 
                                               stopTime:[dict objectForKey:@"stopTime"] 
                                             lunchStart:[dict objectForKey:@"lunchStart"] 
@@ -257,6 +281,11 @@ NSString *const getAll = @"_all_docs?include_docs=true";
         return lectures;
     }
 }
+/*********************************************************************
+ METHOD : GET ALL NOTE AND MESSAGE OBJECTS FROM NOTIFICATION DATABASE
+ ACCEPTS: NONE    
+ RETURNS: NSDictionary with lists of Note and Message objects
+ *********************************************************************/
 -(NSDictionary*)getNotifications {
     NSString* urlString = [NSString stringWithFormat:@"%@%@", notificationsDB, getAll];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
