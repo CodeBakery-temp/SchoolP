@@ -44,12 +44,56 @@
     NSArray* allYourNotes = [schedule getNotesOfWeek:user notes:notes currentWeek:[components week]];
     NSDictionary* notesSorted = [schedule getNotesPerDays:allYourNotes];
     //[schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];
+    
+    
+    if ([[user admin] isEqualTo:@"1"]) {
+        
+        // GET TODAY'S, THIS WEEK'S SCHEDULE & READ MESSAGES
+        
+        /////// Denna kod här nedanför är menyn för ADMIN
+        
+        NSLog (@"\n 1 = Create Schedule \n 2 = Create Message \n 3 = Create Message to class \n 4 = Edit Schedule \n 5 = Today \n 6 = Week \n 0 = Exit");
+        
+        NSLog(@"Pick a number between 1 and 7:");
+        do {
+            scanf ("%i", &value);
+            switch (value)
+            {
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    //NSLog (@"Reminder Notes: %@", [notesSorted description]);
+                    
+                    break;
+                case 4:
+                    //NSLog (@"Reminder Notes: %@", [notesSorted description]);
+                    
+                    break;
+                case 5:
+                    for (Lecture* lec in lecturesToday) {
+                        [lec printLecture];
+                    }
+                    break;
+                case 6:
+                    //NSLog (@"\nlectures this week:\n%@", [lecturesSorted description]);
+                    [schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];
 
-    // GET TODAY'S, THIS WEEK'S SCHEDULE & READ NOTES
-    NSLog (@"\n 1 = Today \n 2 = Week \n 3 = Messages \n 0 = Exit");
-    NSLog(@"Pick a number between 1 and 3:");
-    do {
-        scanf ("%i", &value);
+                    break;
+                default:
+                    while (value != 0);
+                    NSLog(@"Good bye!");
+                    break;
+            }
+        }while (value != 0); 
+        /////// Denna kod här nedanför är menyn för STUDENT
+    } else {NSLog (@"\n 1 = Today \n 2 = Week \n 3 = Messages \n 0 = Exit");
+        NSLog(@"Pick a number between 1 and 3:");
+        do {
+            scanf ("%i", &value);
             switch (value)
             {
                 case 1:
@@ -71,7 +115,8 @@
                     NSLog(@"Good bye!");
                     break;
             }
-    }while (value != 0);
+        }while (value != 0);
+    }
 }
 
 @end
