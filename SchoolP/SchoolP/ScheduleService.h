@@ -14,6 +14,10 @@
 
 -(NSDictionary*)getLecturesPerDays:(NSArray *)lectures;
 
+-(NSDictionary*)getLecturesWithVersion:(NSDictionary*)lectures;
+
+-(NSDictionary*)getLecturesPerDaysRefined:(NSArray*)lectures;
+
 -(NSSet*)getLecturesOfDay: (User*)user;
 
 -(NSArray*)getNotesOfWeek: (User*)user
@@ -31,8 +35,10 @@
                   version:(NSString*)version 
                  lectures:(NSArray*) lectures 
                  jsonPath:(NSString*)jsonPath;
+
 // APP
 -(void)updateLectureTemplate:(id)lecture;
+
 -(void)updateLectureEvent:(id)lecture;
 
 -(void)printLecturesWithNotes:(NSDictionary*)lectures 

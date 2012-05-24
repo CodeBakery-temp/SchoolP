@@ -79,6 +79,136 @@
 }
 
 /*********************************************************************
+ METHOD : GET ALL LECTURE OBJECTS SORTED NEWEST VERSION IN MONDAY - FRIDAY
+ ACCEPTS: NSDictionary with Lecture objects sorted in KEYS MONDAY - FRIDAY
+ RETURNS: NSDictionary with Lecture objects sorted only newest version in KEYS MONDAY - FRIDAY
+ *********************************************************************/
+-(NSDictionary*)getLecturesWithVersion:(NSDictionary *)lectures {
+    NSDictionary* lecturesDays = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                  [NSMutableArray array], @"MONDAY",
+                                  [NSMutableArray array], @"TUESDAY",
+                                  [NSMutableArray array], @"WEDNESDAY",
+                                  [NSMutableArray array], @"THURSDAY",
+                                  [NSMutableArray array], @"FRIDAY",nil];
+    for (NSString* weekDay in lectures){            // EACH WEEKDAY
+        //NSLog(@"%@", weekDay);
+        // CHECKS NUMBER OF DIFFERENT COURSES FOR EACH DAY
+        NSString* top = @"0";
+        for (Lecture* lec in [lectures objectForKey:weekDay]){ // EACH LECTURE IN CURRENT DAY - CHECK ID COUNT
+            if ([[lec courseID] isGreaterThan:top]) {
+                top = [lec courseID];
+            }
+        }
+        //FINDS TOP VERSION OF EACH COURSE FOR THE DAY
+        NSInteger COURSESNUM = [top integerValue];
+        for (NSInteger CURRENTCOURSE=1; CURRENTCOURSE<=COURSESNUM; CURRENTCOURSE++){
+            // CHECKS DIFFERENT COURSES
+            NSString* versionTop = @"0";
+            Lecture* lecture = [Lecture alloc];
+            for (Lecture* lec in [lectures objectForKey:weekDay]){  // EACH LECTURE IN CURRENT DAY
+                if([[lec courseID]isEqualTo:[NSString stringWithFormat:@"%d", CURRENTCOURSE]]
+                   &&[[lec version]isGreaterThan:versionTop]) { // IS SPECIFIC COURSE AND VERSION IS HIGHER THAN PREVIOUS
+                    versionTop = [lec version];
+                    lecture = [lecture initCourseWithName:[lec course] 
+                                                    grade:[lec grade] 
+                                                  teacher:[lec teacher] 
+                                                     room:[lec room] 
+                                                 courseID:[lec courseID] 
+                                                  version:[lec version] 
+                                                startTime:[lec startTime] 
+                                                 stopTime:[lec stopTime] 
+                                               lunchStart:[lec lunchStart] 
+                                                lunchStop:[lec lunchStop] 
+                                                     year:[lec year] 
+                                               daysOfWeek:[lec daysOfWeek] 
+                                                    weeks:[lec weeks] 
+                                                couchDBId:[lec couchDBId] 
+                                               couchDBRev:[lec couchDBRev]];
+                }
+            }
+            [[lecturesDays objectForKey:weekDay] addObject:lecture];
+            
+        }
+        
+    }
+    return lecturesDays;
+}
+
+/*********************************************************************
+ METHOD : GET ALL LECTURE OBJECTS SORTED NEWEST VERSION IN MONDAY - FRIDAY
+ ACCEPTS: NSArray with Lecture objects
+ RETURNS: NSDictionary with Lecture objects sorted only newest version in KEYS MONDAY - FRIDAY
+ *********************************************************************/
+-(NSDictionary*)getLecturesPerDaysRefined:(NSArray*)lectures {
+    NSDictionary* tempSort = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                              [NSMutableArray array], @"MONDAY",
+                              [NSMutableArray array], @"TUESDAY",
+                              [NSMutableArray array], @"WEDNESDAY",
+                              [NSMutableArray array], @"THURSDAY",
+                              [NSMutableArray array], @"FRIDAY",nil];
+    NSDictionary* lecturesDays = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                  [NSMutableArray array], @"MONDAY",
+                                  [NSMutableArray array], @"TUESDAY",
+                                  [NSMutableArray array], @"WEDNESDAY",
+                                  [NSMutableArray array], @"THURSDAY",
+                                  [NSMutableArray array], @"FRIDAY",nil];
+    for(NSArray* day in tempSort) {
+        //NSLog(@"DICTIONARY DAY %@", day);
+        for(Lecture* lecture in lectures) {
+            for(NSString* weekDay in [lecture daysOfWeek]) {
+                if(![weekDay caseInsensitiveCompare:[NSString stringWithFormat:@"%@", day]]) {
+                    //NSLog(@"WEEKDAY %@", weekDay);
+                    [[tempSort objectForKey:day] addObject:lecture];
+                }
+            }
+        }
+    }
+    
+    for (NSString* weekDay in tempSort){            // EACH WEEKDAY
+        //NSLog(@"%@", weekDay);
+        // CHECKS NUMBER OF DIFFERENT COURSES FOR EACH DAY
+        NSString* top = @"0";
+        for (Lecture* lec in [tempSort objectForKey:weekDay]){ // EACH LECTURE IN CURRENT DAY - CHECK ID COUNT
+            if ([[lec courseID] isGreaterThan:top]) {
+                top = [lec courseID];
+            }
+        }
+        //FINDS TOP VERSION OF EACH COURSE FOR THE DAY
+        NSInteger COURSESNUM = [top integerValue];
+        for (NSInteger CURRENTCOURSE=1; CURRENTCOURSE<=COURSESNUM; CURRENTCOURSE++){
+            // CHECKS DIFFERENT COURSES
+            NSString* versionTop = @"0";
+            Lecture* lecture = [Lecture alloc];
+            for (Lecture* lec in [tempSort objectForKey:weekDay]){  // EACH LECTURE IN CURRENT DAY
+                if([[lec courseID]isEqualTo:[NSString stringWithFormat:@"%d", CURRENTCOURSE]]
+                   &&[[lec version]isGreaterThan:versionTop]) { // IS SPECIFIC COURSE AND VERSION IS HIGHER THAN PREVIOUS
+                    versionTop = [lec version];
+                    lecture = [lecture initCourseWithName:[lec course] 
+                                                    grade:[lec grade] 
+                                                  teacher:[lec teacher] 
+                                                     room:[lec room] 
+                                                 courseID:[lec courseID] 
+                                                  version:[lec version] 
+                                                startTime:[lec startTime] 
+                                                 stopTime:[lec stopTime] 
+                                               lunchStart:[lec lunchStart] 
+                                                lunchStop:[lec lunchStop] 
+                                                     year:[lec year] 
+                                               daysOfWeek:[lec daysOfWeek] 
+                                                    weeks:[lec weeks] 
+                                                couchDBId:[lec couchDBId] 
+                                               couchDBRev:[lec couchDBRev]];
+                }
+            }
+            [[lecturesDays objectForKey:weekDay] addObject:lecture];
+            
+        }
+        
+    }
+    return lecturesDays;
+}
+
+/*********************************************************************
  METHOD : GET LECTURE OBJECTS FROM USER-DATA AND CURRENT DAY
  ACCEPTS: Student/Admin object
  RETURNS: NSSet with Lecture objects
