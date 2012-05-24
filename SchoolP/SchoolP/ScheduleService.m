@@ -1,6 +1,5 @@
 #import "ScheduleService.h"
-#import "Admin.h"
-#import "Student.h"
+#import "User.h"
 #import "Lecture.h"
 #import "DBService.h"
 #import "Note.h"
@@ -30,7 +29,10 @@
  ACCEPTS: Student/Admin object, NSArray of Lecture objects, NSUInteger of current week    
  RETURNS: NSArray with Lecture objects
  *********************************************************************/
--(NSArray*)getLecturesOfWeek:(id)user lectures:(NSArray *)lectures currentWeek: (NSUInteger) currentWeek {
+-(NSArray*)getLecturesOfWeek:(User*)user 
+                    lectures:(NSArray *)lectures
+                 currentWeek: (NSUInteger) currentWeek {
+    
     //NSLog(@"WEEK %lu", currentWeek);
     //NSLog(@"USER %@", [user mailAddress]);
     //NSLog(@"LECTURES %@", lectures);
@@ -81,7 +83,7 @@
  ACCEPTS: Student/Admin object
  RETURNS: NSSet with Lecture objects
  *********************************************************************/
--(NSSet*)getLecturesOfDay:(id)user {
+-(NSSet*)getLecturesOfDay:(User*)user {
     NSDate *date = [NSDate date];
     NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
     [weekDay setDateFormat:@"EEEE"];
@@ -104,7 +106,10 @@
  ACCEPTS: Student/Admin object, NSArray of Note objects, NSUInteger of current week    
  RETURNS: NSArray with Note objects 
  *********************************************************************/
--(NSArray*)getNotesOfWeek:(id)user notes:(NSArray *)notes currentWeek:(NSUInteger)currentWeek {
+-(NSArray*)getNotesOfWeek:(User*)user 
+                    notes:(NSArray *)notes 
+              currentWeek:(NSUInteger)currentWeek {
+    
     NSMutableArray* userNotes = [NSMutableArray array];
     for(id course in [user courses]) {
         for(Note* note in notes) {
@@ -166,7 +171,11 @@
  ACCEPTS: NSString with number of ID, NSString with number of version, NSArray with Lecture objects, NSString PATH to JSON DATA
  RETURNS: NONE
  *********************************************************************/
--(void)updateLectureEvent:(NSString *)courseID version:(NSString*)version lectures:(NSArray *)lectures jsonPath:(NSString*)jsonPath {
+-(void)updateLectureEvent:(NSString *)courseID 
+                  version:(NSString*)version 
+                 lectures:(NSArray *)lectures
+                 jsonPath:(NSString*)jsonPath {
+    
     for(Lecture* lec in lectures) {
         if([[lec courseID]isEqualTo:courseID]&&[[lec version]isEqualTo:version]) {
             NSLog(@"FOUND: %@", lec);

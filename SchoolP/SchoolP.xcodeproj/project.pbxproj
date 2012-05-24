@@ -14,10 +14,9 @@
 		06EFCE3015594F4F00498776 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06EFCE2F15594F4F00498776 /* Foundation.framework */; };
 		06EFCE3315594F4F00498776 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE3215594F4F00498776 /* main.m */; };
 		06EFCE3715594F4F00498776 /* SchoolP.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06EFCE3615594F4F00498776 /* SchoolP.1 */; };
-		06EFCE411559502400498776 /* Student.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE401559502400498776 /* Student.m */; };
-		06EFCE441559506800498776 /* Admin.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE431559506800498776 /* Admin.m */; };
 		06EFCE4A155950CF00498776 /* DBService.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EFCE49155950CF00498776 /* DBService.m */; };
 		E7961B17156BB34500841504 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = E7961B16156BB34500841504 /* Menu.m */; };
+		E7A3A586156E14AA001AE3F6 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A3A585156E14AA001AE3F6 /* User.m */; };
 		E7F81EA415624F86009E96F5 /* LoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F81EA315624F86009E96F5 /* LoginService.m */; };
 /* End PBXBuildFile section */
 
@@ -48,14 +47,12 @@
 		06EFCE3215594F4F00498776 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		06EFCE3515594F4F00498776 /* SchoolP-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SchoolP-Prefix.pch"; sourceTree = "<group>"; };
 		06EFCE3615594F4F00498776 /* SchoolP.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SchoolP.1; sourceTree = "<group>"; };
-		06EFCE3F1559502400498776 /* Student.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
-		06EFCE401559502400498776 /* Student.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Student.m; sourceTree = "<group>"; };
-		06EFCE421559506800498776 /* Admin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Admin.h; sourceTree = "<group>"; };
-		06EFCE431559506800498776 /* Admin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Admin.m; sourceTree = "<group>"; };
 		06EFCE48155950CF00498776 /* DBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBService.h; sourceTree = "<group>"; };
 		06EFCE49155950CF00498776 /* DBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBService.m; sourceTree = "<group>"; };
 		E7961B15156BB34500841504 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
 		E7961B16156BB34500841504 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
+		E7A3A584156E14AA001AE3F6 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		E7A3A585156E14AA001AE3F6 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		E7F81EA215624F86009E96F5 /* LoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginService.h; sourceTree = "<group>"; };
 		E7F81EA315624F86009E96F5 /* LoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,10 +117,6 @@
 		06EFCE3D1559500A00498776 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				06EFCE3F1559502400498776 /* Student.h */,
-				06EFCE401559502400498776 /* Student.m */,
-				06EFCE421559506800498776 /* Admin.h */,
-				06EFCE431559506800498776 /* Admin.m */,
 				067575DF1560EE9400FBCCB9 /* Lecture.h */,
 				067575E01560EE9500FBCCB9 /* Lecture.m */,
 				067575E61560F11100FBCCB9 /* Note.h */,
@@ -132,6 +125,8 @@
 				067BE31B156B70A0001BB461 /* Message.m */,
 				E7961B15156BB34500841504 /* Menu.h */,
 				E7961B16156BB34500841504 /* Menu.m */,
+				E7A3A584156E14AA001AE3F6 /* User.h */,
+				E7A3A585156E14AA001AE3F6 /* User.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -201,8 +196,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				06EFCE3315594F4F00498776 /* main.m in Sources */,
-				06EFCE411559502400498776 /* Student.m in Sources */,
-				06EFCE441559506800498776 /* Admin.m in Sources */,
 				06EFCE4A155950CF00498776 /* DBService.m in Sources */,
 				067575E11560EE9500FBCCB9 /* Lecture.m in Sources */,
 				067575E51560EF3100FBCCB9 /* ScheduleService.m in Sources */,
@@ -210,6 +203,7 @@
 				E7F81EA415624F86009E96F5 /* LoginService.m in Sources */,
 				067BE31C156B70A0001BB461 /* Message.m in Sources */,
 				E7961B17156BB34500841504 /* Menu.m in Sources */,
+				E7A3A586156E14AA001AE3F6 /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "Admin.h"
-#import "Student.h"
+#import "User.h"
 #import "ScheduleService.h"
 #import "DBService.h"
 #import "LoginService.h"

@@ -1,15 +1,15 @@
 #import <Foundation/Foundation.h>
 
-@class Admin, Student;
+@class User;
 
 @interface LoginService: NSObject
 
-@property (nonatomic, copy) NSString *studentLogin;
+@property (nonatomic, copy) NSString *userLogin;
 
 +(id) withUserDictionary: (NSDictionary *) dic;
 
 -(id) initWithUserDictionary: (NSDictionary *) dic;
 
--(Student*) checkLogin: (NSDictionary *) dic;
+-(User*) checkLogin: (NSDictionary *) dic;
 
 @end

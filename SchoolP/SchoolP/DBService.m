@@ -1,14 +1,13 @@
 #import "Note.h"
 #import "DBService.h"
-#import "Admin.h"
-#import "Student.h"
 #import "Lecture.h"
 #import "Message.h"
 #import "Menu.h"
+#import "User.h"
 
-NSString *const usersDB = @"http://you.iriscouch.com/schoolp-users/";
-NSString *const lecturesDB = @"http://you.iriscouch.com/schoolp-schedules/";
-NSString *const notificationsDB = @"http://you.iriscouch.com/schoolp-notifications/";
+NSString *const usersDB = @"http://zephyr.iriscouch.com/schoolp-users/";
+NSString *const lecturesDB = @"http://zephyr.iriscouch.com/schoolp-schedules/";
+NSString *const notificationsDB = @"http://zephyr.iriscouch.com/schoolp-notifications/";
 NSString *const getAll = @"_all_docs?include_docs=true";
 
 
@@ -208,21 +207,20 @@ NSString *const getAll = @"_all_docs?include_docs=true";
         for (NSDictionary *object in usersDic) {    // Step into JSON array (single index)
             NSDictionary* dict = [object objectForKey:@"doc"]; // Step into 'doc' (current object key/values)
             //NSLog(@"OBJECT: %@", [dict allKeys]);
+            
+            User* usr = [User userWithName:[dict objectForKey:@"firstName"] 
+                                  lastName:[dict objectForKey:@"lastName"]
+                                  password:[dict objectForKey:@"password"]
+                               mailAddress:[dict objectForKey:@"mailAddress"]
+                               phoneNumber:[dict objectForKey:@"phoneNumber"] 
+                                     admin:[dict objectForKey:@"admin"]
+                                   courses:[dict objectForKey:@"courses"]];
+            
             if([[dict objectForKey:@"admin"]isEqualToString:@"0"]) {
-                Student* user = [Student studentWithName:[dict objectForKey:@"firstName"] 
-                                                lastName:[dict objectForKey:@"lastName"] 
-                                             mailAddress:[dict objectForKey:@"mailAddress"] 
-                                             phoneNumber:[dict objectForKey:@"phoneNumber"]
-                                                 courses:[dict objectForKey:@"courses"]];
-                [[users objectForKey:@"STUDENT"] addObject:user];
+                [[users objectForKey:@"STUDENT"] addObject:usr];
             }
             else {
-                Admin* user = [Admin adminWithName:[dict objectForKey:@"firstName"] 
-                                          lastName:[dict objectForKey:@"lastName"] 
-                                       mailAddress:[dict objectForKey:@"mailAddress"]
-                                       phoneNumber:[dict objectForKey:@"phoneNumber"]
-                                           courses:[dict objectForKey:@"courses"]];
-                [[users objectForKey:@"ADMIN"] addObject:user];
+                [[users objectForKey:@"ADMIN"] addObject:usr];
             }
         }
         return users;
@@ -273,8 +271,8 @@ NSString *const getAll = @"_all_docs?include_docs=true";
                                                   year:[dict objectForKey:@"year"]
                                             daysOfWeek:[dict objectForKey:@"daysOfWeek"]
                                                  weeks:[dict objectForKey:@"weeks"]
-                                             couchDBId:[dict objectForKey:@"couchDBId"] 
-                                            couchDBRev:[dict objectForKey:@"couchDBRev"]];
+                                             couchDBId:[dict objectForKey:@"_id"] 
+                                            couchDBRev:[dict objectForKey:@"_rev"]];
             
             [lectures addObject:lecture];
         }

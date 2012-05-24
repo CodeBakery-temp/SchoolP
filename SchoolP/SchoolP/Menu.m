@@ -1,8 +1,7 @@
 #import "Menu.h"
 #import "ScheduleService.h"
 #import "Lecture.h"
-#import "Admin.h"
-#import "Student.h"
+#import "User.h"
 #import "Note.h"
 #import "DBService.h"
 #import "LoginService.h"
@@ -33,9 +32,8 @@
     NSMutableDictionary* usersInADic = [NSMutableDictionary dictionaryWithDictionary:[db getUsers]];
     
     LoginService* userLogin = [LoginService withUserDictionary:usersInADic];
-    Student* user = [userLogin checkLogin:usersInADic];
+    User* user = [userLogin checkLogin:usersInADic];
     NSLog(@"User logged in: \n %@", user);
-    
     NSArray* lectures = [db getLectures];
     NSArray* allYourLectures = [schedule getLecturesOfWeek:user lectures:lectures currentWeek:[components week]];
     NSDictionary* lecturesSorted = [schedule getLecturesPerDays:allYourLectures];
@@ -46,8 +44,7 @@
     NSArray* allYourNotes = [schedule getNotesOfWeek:user notes:notes currentWeek:[components week]];
     NSDictionary* notesSorted = [schedule getNotesPerDays:allYourNotes];
     //[schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];
-    
-    
+
     // GET TODAY'S, THIS WEEK'S SCHEDULE & READ NOTES
     NSLog (@"\n 1 = Today \n 2 = Week \n 3 = Messages \n 0 = Exit");
     NSLog(@"Pick a number between 1 and 3:");
@@ -56,13 +53,18 @@
             switch (value)
             {
                 case 1:
-                    NSLog (@"\nlectures this week:\n%@", [lecturesToday description]);
+                    for (Lecture* lec in lecturesToday) {
+                        [lec printLecture];
+                    }
                     break;
                 case 2:
-                    NSLog (@"\nlectures this week:\n%@", [lecturesSorted description]);
+                    //NSLog (@"\nlectures this week:\n%@", [lecturesSorted description]);
+                    [schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];
+                    
                     break;
                 case 3:
-                    NSLog (@"Reminder Notes: %@", [notesSorted description]);
+                    //NSLog (@"Reminder Notes: %@", [notesSorted description]);
+                    
                     break;
                 default:
                     while (value != 0);

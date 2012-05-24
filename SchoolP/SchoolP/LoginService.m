@@ -1,11 +1,10 @@
 #import "LoginService.h"
-#import "Admin.h"
-#import "Student.h"
+#import "User.h"
 
 @implementation LoginService
 
 
-@synthesize studentLogin = _studentLogin;
+@synthesize userLogin = _userLogin;
 
 +(id) withUserDictionary:(NSDictionary *)dic
 {
@@ -22,32 +21,83 @@
 }
 
 
--(Student*) checkLogin: (NSDictionary *) dic
+-(User*) checkLogin: (NSDictionary *) dic
 {
     BOOL state = TRUE;
     while (state) {
         
-        NSLog(@"Mail adresss tack");
-        NSString *studentInput;
-        char studentBuffer[200];
-        scanf("%s", studentBuffer);
-        studentInput = [[NSString alloc] initWithUTF8String:studentBuffer];
-        NSLog(@"you wrote: %@", studentInput);
+        NSLog(@"Login with your mailaddress");
+        NSString *userInput;
+        char userBuffer[200];
+        scanf("%s", userBuffer);
+        userInput = [[NSString alloc] initWithUTF8String:userBuffer];
+        NSLog(@"You wrote: %@", userInput);
         // NSLog(@"%c",input);
-        for(Student* user in [dic objectForKey:@"STUDENT"]) {
-            
-            if ([studentInput isEqualToString:[user mailAddress]]) {
-                NSLog(@"Welcome %@ %@", [user firstName], [user lastName]);
-                //NSLog(@"Meny gör ditt val");
-                //scanf("%s",studentBuffer);
-                return user;
-                NSLog(@"BREAK FROM IF STATEMENT");
+        for (User* user in [dic valueForKey:@"STUDENT"]) {
+            if ([userInput isEqualToString:[user mailAddress]]) {
+                while (state) {
+                    NSLog(@"Password:");
+                    NSString *userPasswordInput;
+                    char userPasswordBuffer[200];
+                    scanf("%s", userPasswordBuffer);
+                    userPasswordInput = [[NSString alloc] initWithUTF8String:userPasswordBuffer];
+                    //NSLog(@"%c",input);
+                    
+                    if ([userPasswordInput isEqualToString:[user password]]) {
+                        if ([userPasswordInput isEqualToString:[user password]]) {
+                            NSLog(@"Welcome USER %@ %@", [user firstName], [user lastName]);
+                            //NSLog(@"Meny gör ditt val");
+                            //scanf("%s",studentBuffer);
+                            
+                            return user;
+                            NSLog(@"BREAK FROM IF STATEMENT");
+                            
+                            break;
+                            state = FALSE;
+                        }
+                    }else {
+                        NSLog(@"!!! WRONG PASSWORD!!! PASSWORD:");   
+                    }
+                }
                 
-                break;
-                state = FALSE;
+                
+            break;  
+            }
+        }  
+        for (User* user in [dic valueForKey:@"ADMIN"]) {
+            if ([userInput isEqualToString:[user mailAddress]]) {
+                while (state) {
+                    NSLog(@"Password:");
+                    NSString *userPasswordInput;
+                    char userPasswordBuffer[200];
+                    scanf("%s", userPasswordBuffer);
+                    userPasswordInput = [[NSString alloc] initWithUTF8String:userPasswordBuffer];
+                    //NSLog(@"%c",input);
+                    
+                    if ([userPasswordInput isEqualToString:[user password]]) {
+                        if ([userPasswordInput isEqualToString:[user password]]) {
+                            NSLog(@"Welcome USER %@ %@", [user firstName], [user lastName]);
+                            //NSLog(@"Meny gör ditt val");
+                            //scanf("%s",studentBuffer);
+                            
+                            return user;
+                            NSLog(@"BREAK FROM IF STATEMENT");
+                            
+                            break;
+                            state = FALSE;
+                        }
+                    }else {
+                        NSLog(@"!!! WRONG PASSWORD!!! PASSWORD:");   
+                    }
+                }
+                
+                
+                break;  
             }
         }
+        NSLog(@"______________LoginService END_______________");
     }
+    return nil;
 }
 
 @end
