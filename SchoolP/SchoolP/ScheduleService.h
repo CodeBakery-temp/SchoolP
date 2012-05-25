@@ -19,8 +19,7 @@
 
 -(NSDictionary*)getLecturesPerDaysRefined:(NSArray*)lectures;
 
--(NSSet*)getLecturesOfDay: (User*)user 
-                 lectures:(NSDictionary*)lectures;
+-(NSSet*)getLecturesOfDay:(NSDictionary*)lectures;
 
 -(NSArray*)getNotesOfWeek: (User*)user
                     notes: (NSArray *)notes
@@ -28,8 +27,7 @@
 
 -(NSDictionary*)getNotesPerDays:(NSArray *)notes;
 
--(NSSet*)getNotesOfDay: (User*)user 
-                 notes:(NSDictionary*)notes;
+-(NSSet*)getNotesOfDay:(NSDictionary*)notes;
 
 -(NSArray*)getUserMessages: (User*)user
              notifications: (NSArray *)notifications;

@@ -217,7 +217,7 @@
  ACCEPTS: Student/Admin object and NSDictionary with Lecture objects sorted in KEYS MONDAY - FRIDAY 
  RETURNS: NSSet with Lecture objects
  *********************************************************************/
--(NSSet*)getLecturesOfDay:(User*)user lectures:(NSDictionary*) lectures {
+-(NSSet*)getLecturesOfDay:(NSDictionary*) lectures {
     NSDate *date = [NSDate date];
     NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
     [weekDay setDateFormat:@"EEEE"];
@@ -274,7 +274,7 @@
  ACCEPTS: Student/Admin object and NSDictionary with Note objects sorted in KEYS MONDAY - FRIDAY 
  RETURNS: NSSet with Note objects
  *********************************************************************/
--(NSSet*)getNotesOfDay:(User*)user notes:(NSDictionary*) notes {
+-(NSSet*)getNotesOfDay:(NSDictionary*) notes {
     NSDate *date = [NSDate date];
     NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
     [weekDay setDateFormat:@"EEEE"];

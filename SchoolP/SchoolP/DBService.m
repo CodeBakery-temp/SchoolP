@@ -6,10 +6,11 @@
 #import "User.h"
 
 NSString *const usersDB = @"http://you.iriscouch.com/schoolp-users/";
-NSString *const lecturesDB = @"http://you.iriscouch.com/schoolp-schedules/";
+NSString *const lecturesDB = @"http://you.iriscouch.com//schoolp-schedules/";
 NSString *const notificationsDB = @"http://you.iriscouch.com/schoolp-notifications/";
 NSString *const getAll = @"_all_docs?include_docs=true";
-
+//http://127.0.0.1:5984/
+//http://you.iriscouch.com/
 
 @implementation DBService {
     
@@ -55,8 +56,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     
     //prepare request
     NSString *urlString = [NSString stringWithString: urlAdress];
-    //@"http://127.0.0.1:5984/users"];
-    //@"http://Zephyr:zephyr@zephyr.iriscouch.com/schoolp-notifications"];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
     [request setHTTPMethod:@"POST"];

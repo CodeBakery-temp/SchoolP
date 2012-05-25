@@ -37,7 +37,7 @@
     NSArray* lectures = [db getLectures];
     NSArray* allYourLectures = [schedule getLecturesOfWeek:user lectures:lectures currentWeek:[components week]];
     NSDictionary* lecturesSorted = [schedule getLecturesPerDays:allYourLectures];
-    NSSet* lecturesToday = [schedule getLecturesOfDay:user];
+    NSSet* lecturesToday = [schedule getLecturesOfDay:lecturesSorted];
     
     // GET NOTES
     NSArray* notes = [[db getNotifications]objectForKey:@"NOTES"];
@@ -84,8 +84,8 @@
                     break;
                 case 6:
                     //NSLog (@"\nlectures this week:\n%@", [lecturesSorted description]);
-                    [schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];
-
+                    [schedule printCurrentWeek:lecturesSorted notes:notesSorted];
+                    
                     break;
                 default:
                     while (value != 0);
@@ -107,7 +107,7 @@
                     break;
                 case 2:
                     //NSLog (@"\nlectures this week:\n%@", [lecturesSorted description]);
-                    [schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];
+                    [schedule printCurrentWeek:lecturesSorted notes:notesSorted];
                     
                     break;
                 case 3:
