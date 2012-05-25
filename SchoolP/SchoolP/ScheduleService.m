@@ -209,25 +209,17 @@
 }
 
 /*********************************************************************
- METHOD : GET LECTURE OBJECTS FROM USER-DATA AND CURRENT DAY
- ACCEPTS: Student/Admin object
+ METHOD : GET LECTURE OBJECTS FROM USER-DATA AND CALCULATED CURRENT DAY
+ ACCEPTS: Student/Admin object and NSDictionary with Lecture objects sorted in KEYS MONDAY - FRIDAY 
  RETURNS: NSSet with Lecture objects
  *********************************************************************/
--(NSSet*)getLecturesOfDay:(User*)user {
+-(NSSet*)getLecturesOfDay:(User*)user lectures:(NSDictionary*) lectures {
     NSDate *date = [NSDate date];
     NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
     [weekDay setDateFormat:@"EEEE"];
     
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:NSWeekCalendarUnit fromDate:date];
+    NSSet* lecturesOfDay = [lectures objectForKey:[[weekDay stringFromDate:date] uppercaseString]];
     
-    NSSet* lecturesOfDay;
-    if(!lecturesOfDay) {
-        DBService* db = [DBService database];
-        NSArray* lectures = [db getLectures];   // get all lectures
-        NSArray* weekLectures = [self getLecturesOfWeek:user lectures:lectures currentWeek:[components week]];
-        lecturesOfDay = [[self getLecturesPerDays:weekLectures]objectForKey:[[weekDay stringFromDate:date] uppercaseString]];
-    }
     return lecturesOfDay;
 }
 
@@ -271,6 +263,23 @@
         }
     }
     return notesDays;
+}
+
+/*********************************************************************
+ METHOD : GET ALL MESSAGE OBJECTS FROM USER-DATA
+ ACCEPTS: NSDictionary with at least NSSet of Message objects
+ RETURNS: NSArray with Message objects for User
+ *********************************************************************/
+-(NSArray*)getUserMessages:(User*)user notifications:(NSDictionary *)notifications {
+    NSMutableArray* inbox = [NSMutableArray array];
+    for(Message* message in [notifications objectForKey:@"MESSAGE"]) {
+        for(NSString* email in [message receiver]) {
+            if([[user mailAddress]isEqualTo:email]) {
+                [inbox addObject:message];
+            }
+        }
+    }
+    return inbox;
 }
 
 /*********************************************************************
@@ -349,7 +358,7 @@
  ACCEPTS: Lecture object
  RETURNS: NONE
  *********************************************************************/
--(void)updateLectureTemplate:(id)lecture {
+-(void)updateLectureTemplate:(Lecture*)lecture {
     // check if class is Lecture object
 }
 
@@ -358,90 +367,85 @@
  ACCEPTS: Lecture object
  RETURNS: NONE
  *********************************************************************/
--(void)updateLectureEvent:(id)lecture {
+-(void)updateLectureEvent:(Lecture*)lecture {
     // check if class is Lecture object
 }
 
 /*********************************************************************
- METHOD : PRINT ALL LECTURE OBJECTS WITH RELATED NOTE OBJECTS - CONSOLE
+ METHOD : PRINT ALL LECTURE OBJECTS WITH RELATED NOTE OBJECTS OF CURRENT WEEK
  ACCEPTS: NSDictionary with sorted Lecture objects, NSDictionary with sorted Note objects
  RETURNS: NONE
  *********************************************************************/
--(void)printLecturesWithNotes:(NSDictionary *)lectures notes:(NSDictionary *)notes {
+-(void)printCurrentWeek:(NSDictionary *)lectures notes:(NSDictionary *)notes {
     NSLog(@"MONDAY");
     for(Lecture* lecture in [lectures objectForKey:@"MONDAY"]) {
-        NSLog(@"%@", [lecture course]);
+        NSLog(@"-LECTURE: %@ v%@", [lecture course], [lecture version]);
         for(Note* note in [notes objectForKey:@"MONDAY"]) {
             if([[lecture courseID]isEqualTo:[note courseID]]) {
-                NSLog(@"%@", [note text]);
+                NSLog(@"--NOTE: %@", [note text]);
             }
         }
     }
     NSLog(@"TUESDAY");
     for(Lecture* lecture in [lectures objectForKey:@"TUESDAY"]) {
-        NSLog(@"%@", [lecture course]);
+        NSLog(@"-LECTURE: %@ v%@", [lecture course], [lecture version]);
         for(Note* note in [notes objectForKey:@"TUESDAY"]) {
             if([[lecture courseID]isEqualTo:[note courseID]]) {
-                NSLog(@"%@", [note text]);
+                NSLog(@"--NOTE: %@", [note text]);
             }
         }
     }
     NSLog(@"WEDNESDAY");
     for(Lecture* lecture in [lectures objectForKey:@"WEDNESDAY"]) {
-        NSLog(@"%@", [lecture course]);
+        NSLog(@"-LECTURE: %@ v%@", [lecture course], [lecture version]);
         for(Note* note in [notes objectForKey:@"WEDNESDAY"]) {
             if([[lecture courseID]isEqualTo:[note courseID]]) {
-                NSLog(@"%@", [note text]);
+                NSLog(@"--NOTE: %@", [note text]);
             }
         }
     }
     NSLog(@"THURSDAY");
     for(Lecture* lecture in [lectures objectForKey:@"THURSDAY"]) {
-        NSLog(@"%@", [lecture course]);
+        NSLog(@"-LECTURE: %@ v%@", [lecture course], [lecture version]);
         for(Note* note in [notes objectForKey:@"THURSDAY"]) {
             if([[lecture courseID]isEqualTo:[note courseID]]) {
-                NSLog(@"%@", [note text]);
+                NSLog(@"--NOTE: %@", [note text]);
             }
         }
     }
     NSLog(@"FRIDAY");
     for(Lecture* lecture in [lectures objectForKey:@"FRIDAY"]) {
-        NSLog(@"%@", [lecture course]);
+        NSLog(@"-LECTURE: %@ v%@", [lecture course], [lecture version]);
         for(Note* note in [notes objectForKey:@"FRIDAY"]) {
             if([[lecture courseID]isEqualTo:[note courseID]]) {
-                NSLog(@"%@", [note text]);
+                NSLog(@"--NOTE: %@", [note text]);
             }
         }
     }
-    
 }
 
+
 /*********************************************************************
- METHOD : PRINT ALL LECTURE OBJECTS - CONSOLE
- ACCEPTS: NSDictionary with sorted Lecture objects
+ METHOD : PRINT ALL LECTURE OBJECTS WITH RELATED NOTE OBJECTS OF CURRENT DAY
+ ACCEPTS: NSDictionary with sorted Lecture objects, NSDictionary with sorted Note objects
  RETURNS: NONE
  *********************************************************************/
--(void)printWeek:(NSDictionary*) lecturesWeek {
-    NSLog(@"MONDAY");
-    for(Lecture* lec in [lecturesWeek objectForKey:@"MONDAY"]) {
-        [lec printLecture];
-    }
-    NSLog(@"TUESDAY");
-    for(Lecture* lec in [lecturesWeek objectForKey:@"TUESDAY"]) {
-        [lec printLecture];
-    }
-    NSLog(@"WEDNESDAY");
-    for(Lecture* lec in [lecturesWeek objectForKey:@"WEDNESDAY"]) {
-        [lec printLecture];
-    }
-    NSLog(@"THURSDAY");
-    for(Lecture* lec in [lecturesWeek objectForKey:@"THURSDAY"]) {
-        [lec printLecture];
-    }
-    NSLog(@"FRIDAY");
-    for(Lecture* lec in [lecturesWeek objectForKey:@"FRIDAY"]) {
-        [lec printLecture];
+-(void)printCurrentDay:(NSDictionary *)lectures notes:(NSDictionary *)notes {
+    NSDate *date = [NSDate date];
+    NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
+    [weekDay setDateFormat:@"EEEE"];
+    
+    NSLog(@"%@", [[weekDay stringFromDate:date] uppercaseString]);
+    for(Lecture* lecture in [lectures objectForKey:[[weekDay stringFromDate:date] uppercaseString]]) {
+        NSLog(@"-LECTURE: %@ v%@", [lecture course], [lecture version]);
+        for(Note* note in [notes objectForKey:[[weekDay stringFromDate:date] uppercaseString]]) {
+            if([[lecture courseID]isEqualTo:[note courseID]]) {
+                NSLog(@"--NOTE: %@", [note text]);
+            }
+        }
     }
 }
+
+
 
 @end

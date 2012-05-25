@@ -10,7 +10,7 @@
             sourcePath: (NSString *) theSource;
 
 +(void) lectureToDataBase: (NSDictionary *) dictionary;
-+(void) noteficationToDataBase: (NSDictionary *) dictionary;
++(void) notificationToDataBase: (NSDictionary *) dictionary;
 
 -(NSDictionary*) getUsers;
 -(NSMutableArray*) getLectures;

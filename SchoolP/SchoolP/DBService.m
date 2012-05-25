@@ -135,7 +135,7 @@ NSString *const getAll = @"_all_docs?include_docs=true";
  ACCEPTS: Note or Message object as NSDictionary    
  RETURNS: NONE
  *********************************************************************/
-+(void) noteficationToDataBase:(NSDictionary *)dictionary{
++(void) notificationToDataBase:(NSDictionary *)dictionary{
     NSData *tempData;
     
     if([NSJSONSerialization isValidJSONObject:dictionary])

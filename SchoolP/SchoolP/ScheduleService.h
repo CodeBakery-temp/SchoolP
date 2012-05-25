@@ -1,12 +1,13 @@
 #import <Foundation/Foundation.h>
 
-@class User;
+@class User, Lecture;
 
 @interface ScheduleService : NSObject
 
 +(id)schedule;
 +(id)createSchedule;
 -(id)initSchedule;
+
 
 -(NSArray*)getLecturesOfWeek: (User*)user
                     lectures: (NSArray *)lectures
@@ -18,13 +19,17 @@
 
 -(NSDictionary*)getLecturesPerDaysRefined:(NSArray*)lectures;
 
--(NSSet*)getLecturesOfDay: (User*)user;
+-(NSSet*)getLecturesOfDay: (User*)user 
+                 lectures:(NSDictionary*)lectures;
 
 -(NSArray*)getNotesOfWeek: (User*)user
                     notes: (NSArray *)notes
               currentWeek: (NSUInteger)currentWeek;
 
 -(NSDictionary*)getNotesPerDays:(NSArray *)notes;
+
+-(NSArray*)getUserMessages: (User*)user
+             notifications: (NSArray *)notifications;
 
 // TEST
 -(void)updateLectureTemplate:(NSString*)courseID 
@@ -37,13 +42,15 @@
                  jsonPath:(NSString*)jsonPath;
 
 // APP
--(void)updateLectureTemplate:(id)lecture;
+-(void)updateLectureTemplate:(Lecture*)lecture;
 
--(void)updateLectureEvent:(id)lecture;
+-(void)updateLectureEvent:(Lecture*)lecture;
 
--(void)printLecturesWithNotes:(NSDictionary*)lectures 
-                        notes:(NSDictionary*)notes;
 
--(void)printWeek:(NSDictionary*) lecturesWeek;
+-(void)printCurrentWeek:(NSDictionary*)lectures 
+                  notes:(NSDictionary*)notes;
+
+-(void)printCurrentDay:(NSDictionary*)lectures 
+                 notes:(NSDictionary*)notes;
 
 @end
