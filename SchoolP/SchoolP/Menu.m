@@ -52,7 +52,7 @@
         
         /////// Denna kod här nedanför är menyn för ADMIN
         
-        NSLog (@"\n 1 = Create Schedule \n 2 = Create Message \n 3 = Create Message to class \n 4 = Edit Schedule \n 5 = Today \n 6 = Week \n 0 = Exit");
+        NSLog (@"\n\n 1 = Create Schedule \n 2 = Create Message \n 3 = Create Message to class \n 4 = Edit Schedule \n 5 = Today \n 6 = Week \n 0 = Exit\n\n\n");
         
         NSLog(@"Pick a number between 1 and 7:");
         do {
@@ -60,18 +60,22 @@
             switch (value)
             {
                 case 1:
+                    [DBService postToDatabase:[DBService lecturesDB] sourcePath:@"/Users/DQF/Desktop/schema.json"];
                     
                     break;
                 case 2:
+                    //Create Message
                     
                     break;
                 case 3:
-                    //NSLog (@"Reminder Notes: %@", [notesSorted description]);
+                    //Create Message to class
                     
                     break;
                 case 4:
-                    //NSLog (@"Reminder Notes: %@", [notesSorted description]);
-                    
+                    [[ScheduleService alloc] updateLectureTemplate:@"3" //id på kursen 1 JavaScript, 2 Objective-C, 3 InDesign
+                                                          lectures:lectures 
+                                                          jsonPath:@"/Users/DQF/Desktop/schema.json"];
+                
                     break;
                 case 5:
                     for (Lecture* lec in lecturesToday) {
@@ -90,7 +94,7 @@
             }
         }while (value != 0); 
         /////// Denna kod här nedanför är menyn för STUDENT
-    } else {NSLog (@"\n 1 = Today \n 2 = Week \n 3 = Messages \n 0 = Exit");
+    } else {NSLog (@"\n\n 1 = Today \n 2 = Week \n 3 = Messages \n 0 = Exit\n\n\n");
         NSLog(@"Pick a number between 1 and 3:");
         do {
             scanf ("%i", &value);

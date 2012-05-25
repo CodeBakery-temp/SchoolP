@@ -10,10 +10,16 @@
             sourcePath: (NSString *) theSource;
 
 +(void) lectureToDataBase: (NSDictionary *) dictionary;
+<<<<<<< HEAD
 +(void) notificationToDataBase: (NSDictionary *) dictionary;
+=======
++(void) noteficationToDataBase: (NSDictionary *) dictionary;
++(NSString *) lecturesDB;
 
--(NSDictionary*) getUsers;
--(NSMutableArray*) getLectures;
--(NSDictionary*) getNotifications;
+-(NSDictionary *) getUsers;
+-(NSMutableArray *) getLectures;
+-(NSDictionary *) getNotifications;
+>>>>>>> Boffe Menu
+
 
 @end
