@@ -28,6 +28,9 @@
 
 -(NSDictionary*)getNotesPerDays:(NSArray *)notes;
 
+-(NSSet*)getNotesOfDay: (User*)user 
+                 notes:(NSDictionary*)notes;
+
 -(NSArray*)getUserMessages: (User*)user
              notifications: (NSArray *)notifications;
 

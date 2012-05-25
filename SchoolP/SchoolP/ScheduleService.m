@@ -126,7 +126,9 @@
                                                couchDBRev:[lec couchDBRev]];
                 }
             }
-            [[lecturesDays objectForKey:weekDay] addObject:lecture];
+            if([lecture courseID]) {
+                [[lecturesDays objectForKey:weekDay] addObject:lecture];
+            }
             
         }
         
@@ -200,7 +202,9 @@
                                                couchDBRev:[lec couchDBRev]];
                 }
             }
-            [[lecturesDays objectForKey:weekDay] addObject:lecture];
+            if([lecture courseID]) {
+                [[lecturesDays objectForKey:weekDay] addObject:lecture];
+            }
             
         }
         
@@ -263,6 +267,21 @@
         }
     }
     return notesDays;
+}
+
+/*********************************************************************
+ METHOD : GET NOTE OBJECTS FROM USER-DATA AND CALCULATED CURRENT DAY
+ ACCEPTS: Student/Admin object and NSDictionary with Note objects sorted in KEYS MONDAY - FRIDAY 
+ RETURNS: NSSet with Note objects
+ *********************************************************************/
+-(NSSet*)getNotesOfDay:(User*)user notes:(NSDictionary*) notes {
+    NSDate *date = [NSDate date];
+    NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
+    [weekDay setDateFormat:@"EEEE"];
+    
+    NSSet* notesOfDay = [notes objectForKey:[[weekDay stringFromDate:date] uppercaseString]];
+    
+    return notesOfDay;
 }
 
 /*********************************************************************

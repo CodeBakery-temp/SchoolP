@@ -6,20 +6,19 @@
 +(id)createDatabase;
 -(id)initDatabase;
 
++(NSString *) lecturesDB;
+
 +(void) postToDatabase: (NSString *) urlAdress
             sourcePath: (NSString *) theSource;
 
 +(void) lectureToDataBase: (NSDictionary *) dictionary;
-<<<<<<< HEAD
 +(void) notificationToDataBase: (NSDictionary *) dictionary;
-=======
-+(void) noteficationToDataBase: (NSDictionary *) dictionary;
-+(NSString *) lecturesDB;
+
++(void) notificationToDataBase: (NSDictionary *) dictionary;
 
 -(NSDictionary *) getUsers;
 -(NSMutableArray *) getLectures;
 -(NSDictionary *) getNotifications;
->>>>>>> Boffe Menu
 
 
 @end

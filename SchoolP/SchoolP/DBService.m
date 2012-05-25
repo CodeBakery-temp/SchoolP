@@ -18,10 +18,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     NSMutableArray *lectures;
 }
 
-+(NSString *)lecturesDB {
-    return lecturesDB;
-}
-
 +(id)database {
     return [self createDatabase];
 }
@@ -44,6 +40,10 @@ NSString *const getAll = @"_all_docs?include_docs=true";
         lectures = [NSMutableArray array];
     }
     return self;
+}
+
++(NSString *)lecturesDB {
+    return lecturesDB;
 }
 
 /*********************************************************************
