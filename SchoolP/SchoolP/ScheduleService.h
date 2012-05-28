@@ -10,7 +10,6 @@
 
 
 -(NSArray*)getLecturesOfWeek: (User*)user
-                    lectures: (NSArray *)lectures
                  currentWeek: (NSUInteger)currentWeek;
 
 -(NSDictionary*)getLecturesPerDays:(NSArray *)lectures;
@@ -22,37 +21,32 @@
 -(NSSet*)getLecturesOfDay:(NSDictionary*)lectures;
 
 -(NSArray*)getNotesOfWeek: (User*)user
-                    notes: (NSArray *)notes
               currentWeek: (NSUInteger)currentWeek;
 
 -(NSDictionary*)getNotesPerDays:(NSArray *)notes;
 
 -(NSSet*)getNotesOfDay:(NSDictionary*)notes;
 
--(NSArray*)getUserMessages: (User*)user
-             messages: (NSArray *)messages;
+-(NSArray*)getUserMessages:(User*)user;
 
--(void)createLecture:(NSArray *)lectures 
-             jsonPath:(NSString *)jsonPath; 
+-(void)createLecture:(NSString *)jsonPath; 
 
 -(void)createNote:(NSString *)jsonPath;
 
 -(void)createMessage:(NSString *)jsonPath;
 
 // TEST
--(void)updateLectureTemplate:(NSString*)courseID 
-                    lectures:(NSArray*) lectures 
+-(void)updateLectureTemplate:(NSString*)courseID  
                     jsonPath:(NSString*)jsonPath;
 
 -(void)updateLectureEvent:(NSString*)courseID 
-                  version:(NSString*)version 
-                 lectures:(NSArray*) lectures 
+                  version:(NSString*)version  
                  jsonPath:(NSString*)jsonPath;
 
 // APP
--(void)updateLectureTemplate:(Lecture*)lecture;
+-(void)updateLectureTemplate:(Lecture*)lecture; // TO-DO
 
--(void)updateLectureEvent:(Lecture*)lecture;
+-(void)updateLectureEvent:(Lecture*)lecture; // TO-DO
 
 
 -(void)printCurrentWeek:(NSDictionary*)lectures 

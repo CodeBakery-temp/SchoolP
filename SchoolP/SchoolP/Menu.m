@@ -1,11 +1,13 @@
-#import "Menu.h"
-#import "ScheduleService.h"
-#import "Lecture.h"
-#import "User.h"
-#import "Note.h"
 #import "DBService.h"
 #import "LoginService.h"
+#import "ScheduleService.h"
+#import "Menu.h"
+#import "Lecture.h"
+#import "Note.h"
+#import "User.h"
 #import "Message.h"
+
+NSString const* homefolder = @"username";
 
 @implementation Menu
 
@@ -20,7 +22,6 @@
 {
     int value = 0;
     //////TO GET ONE USER FROM LOGIN START//////
-    DBService* db = [DBService database];
     ScheduleService* schedule = [ScheduleService schedule];
     
     // DATE
@@ -30,23 +31,18 @@
     NSDateComponents *components = [calendar components:units fromDate:date];
     
     // LOGIN
-    NSMutableDictionary* usersInADic = [NSMutableDictionary dictionaryWithDictionary:[db getUsers]];
-    
-    LoginService* userLogin = [LoginService withUserDictionary:usersInADic];
-    User* user = [userLogin checkLogin:usersInADic];
+    LoginService* userLogin = [LoginService login];
+    User* user = [userLogin checkLogin];
     NSLog(@"User logged in: \n %@", user);
-    NSArray* lectures = [db getLectures];
-    NSArray* allYourLectures = [schedule getLecturesOfWeek:user lectures:lectures currentWeek:[components week]];
+    NSArray* allYourLectures = [schedule getLecturesOfWeek:user currentWeek:[components week]];
     NSDictionary* lecturesSorted = [schedule getLecturesPerDaysRefined:allYourLectures];
-    NSSet* lecturesToday = [schedule getLecturesOfDay:lecturesSorted];
     
-    NSDictionary* notifications = [db getNotifications];
     // GET NOTES
-    NSArray* notes = [notifications objectForKey:@"NOTES"];
-    NSArray* allYourNotes = [schedule getNotesOfWeek:user notes:notes currentWeek:[components week]];
+    NSArray* allYourNotes = [schedule getNotesOfWeek:user currentWeek:[components week]];
     NSDictionary* notesSorted = [schedule getNotesPerDays:allYourNotes];
-    // MESSAGES
-    NSArray* message = [notifications objectForKey:@"MESSAGES"];
+    
+    // YOUR MESSAGES
+    NSArray* message = [schedule getUserMessages:user];
     NSLog(@"Inbox :%lu", [message count]);
     
     
@@ -56,39 +52,54 @@
         
         /////// Denna kod här nedanför är menyn för ADMIN
         
-        NSLog (@"\n\n 1 = Create Schedule \n 2 = Send Message[One] \n 3 = Send Message[Many] \n 4 = Edit Schedule \n 5 = Today \n 6 = Week \n7 = Create Note \n 0 = Exit\n\n\n");
-        
-        NSLog(@"Pick a number between 1 and 6:");
         do {
+             NSLog (@"________________________________________________________\n 1 = Today \n 2 = Week \n 3 = Inbox \n 4 = Create Lecture Template \n 5 = Update Lecture Template \n 6 = Update Lecture Event \n 7 = Create Note \n 8 = Send Message [one] \n 9 = Send Message [many]\n 0 = Exit\nPICK A NUMBER! \n");
             scanf ("%i", &value);
             switch (value)
             {
                 case 1:
-                    [DBService postToDatabase:[DBService lecturesDB] sourcePath:@"/Users/DQF/Desktop/schema.json"];
+                    // Lectures DAY
+                    [schedule printCurrentDay:lecturesSorted notes:notesSorted];
+                    /*for (Lecture* lec in lecturesToday) {
+                        [lec printLecture];
+                    }*/
+                    //[schedule createLecture:[db getLectures] jsonPath:@"/Users/DQF/Desktop/schema.json"];
                     break;
                 case 2:
-                    //Create Message
-                    [schedule createMessage:@"/Users/Evhuul/Desktop/message.json"];
+                    // Lectures WEEK
+                    [schedule printCurrentWeek:lecturesSorted notes:notesSorted];
+                    //[schedule createMessage:@"/Users/Evhuul/Desktop/message.json"];
                     break;
                 case 3:
-                    //Create Message to to all
-                    [schedule createMessage:@"/Users/Evhuul/Desktop/messageall.json"];
+                    // Message Inbox
+                    [schedule printInbox:[schedule getUserMessages:user]];
+                    //[schedule createMessage:@"/Users/Evhuul/Desktop/messageall.json"];
                     break;
                 case 4:
-                    [[ScheduleService alloc] updateLectureTemplate:@"3" //id på kursen 1 JavaScript, 2 Objective-C, 3 InDesign
-                                                          lectures:lectures 
-                                                          jsonPath:@"/Users/DQF/Desktop/schema.json"];
+                    // Create Lecture Template
+                    [schedule createLecture:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
+                    //id på kursen 1 JavaScript, 2 Objective-C, 3 InDesign
                     break;
                 case 5:
-                    for (Lecture* lec in lecturesToday) {
-                        [lec printLecture];
-                    }
+                    // Update Lecture Template
+                    [schedule updateLectureTemplate:@"1" jsonPath:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
                     break;
                 case 6:
-                    [schedule printCurrentWeek:lecturesSorted notes:notesSorted];
+                    // Update Lecture Event
+                    [schedule updateLectureEvent:@"1" version:@"1" jsonPath:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
+                    
                     break;
                 case 7:
-                    [schedule createNote:@"/Users/Evhuul/Desktop/note.json"];
+                    // Create Note
+                    [schedule createNote:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/note.json", homefolder]];
+                    break;
+                case 8:
+                    // Create Message [ONE]
+                    [schedule createMessage:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/message.json", homefolder]];
+                    break;
+                case 9:
+                    // Create Message [MANY]
+                    [schedule createMessage:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/messageAll.json", homefolder]];
                     break;
                 default:
                     while (value != 0);
@@ -97,24 +108,21 @@
             }
         }while (value != 0); 
         /////// Denna kod här nedanför är menyn för STUDENT
-    } else {NSLog (@"\n\n 1 = Today \n 2 = Week \n 3 = Inbox \n 0 = Exit\n\n\n");
-        NSLog(@"Pick a number between 1 and 3:");
+    } else {
         do {
+            NSLog (@"________________________________________________________\n 1 = Today \n 2 = Week \n 3 = Inbox \n 0 = Exit\nPICK A NUMBER! \n");
             scanf ("%i", &value);
             switch (value)
             {
                 case 1:
-                    for (Lecture* lec in lecturesToday) {
-                        [lec printLecture];
-                    }
+                    [schedule printCurrentDay:lecturesSorted notes:notesSorted];
                     break;
                 case 2:
                     [schedule printCurrentWeek:lecturesSorted notes:notesSorted];
                     
                     break;
                 case 3:
-                    [schedule getUserMessages:user messages:message];
-                    [schedule printInbox:message];
+                    [schedule printInbox:[schedule getUserMessages:user]];
                     break;
                 default:
                     while (value != 0);

@@ -6,15 +6,13 @@
 +(id)createDatabase;
 -(id)initDatabase;
 
-+(NSString *) lecturesDB;
-
-+(void) postToDatabase: (NSString *) urlAdress
+-(void) postToDatabase: (NSString *) urlAdress
             sourcePath: (NSString *) theSource;
 
-+(void) lectureToDataBase: (NSDictionary *) dictionary;
-+(void) notificationToDataBase: (NSDictionary *) dictionary;
+-(void) lectureToDataBase: (NSDictionary *) dictionary;
+-(void) notificationToDataBase: (NSDictionary *) dictionary;
 
-+(void) notificationToDataBase: (NSDictionary *) dictionary;
+-(void) notificationToDataBase: (NSDictionary *) dictionary;
 
 -(NSDictionary *) getUsers;
 -(NSMutableArray *) getLectures;

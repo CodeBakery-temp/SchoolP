@@ -1,13 +1,13 @@
-#import "Note.h"
 #import "DBService.h"
-#import "Lecture.h"
-#import "Message.h"
 #import "Menu.h"
+#import "Lecture.h"
+#import "Note.h"
 #import "User.h"
+#import "Message.h"
 
-NSString *const usersDB = @"http://zephyr.iriscouch.com/schoolp-users/";
-NSString *const lecturesDB = @"http://zephyr.iriscouch.com//schoolp-schedules/";
-NSString *const notificationsDB = @"http://zephyr.iriscouch.com/schoolp-notifications/";
+NSString *const usersDB = @"http://you.iriscouch.com/schoolp-users/";
+NSString *const lecturesDB = @"http://you.iriscouch.com//schoolp-schedules/";
+NSString *const notificationsDB = @"http://you.iriscouch.com/schoolp-notifications/";
 NSString *const getAll = @"_all_docs?include_docs=true";
 //http://127.0.0.1:5984/
 //http://you.iriscouch.com/
@@ -43,16 +43,12 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     return self;
 }
 
-+(NSString *)lecturesDB {
-    return lecturesDB;
-}
-
 /*********************************************************************
  METHOD : POST DATA TO DATABASE - DIRECT SOURCE TO DATABASE PATH
  ACCEPTS: NSString URL to database, NSString PATH to JSON DATA    
  RETURNS: NONE
  *********************************************************************/
-+(void) postToDatabase:(NSString *) urlAdress sourcePath:(NSString *)theSource{
+-(void) postToDatabase:(NSString *) urlAdress sourcePath:(NSString *)theSource{
     
     //prepare request
     NSString *urlString = [NSString stringWithString: urlAdress];
@@ -68,7 +64,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     NSMutableData *postBody = [NSMutableData data];
     
     [postBody appendData:[NSData dataWithContentsOfFile:theSource]];
-    //@"/Users/DQF/Desktop/CodeBakery/JSON/Glen.json"
     
     //post
     [request setHTTPBody:postBody];
@@ -89,7 +84,7 @@ NSString *const getAll = @"_all_docs?include_docs=true";
  ACCEPTS: Lecture object as NSDictionary    
  RETURNS: NONE
  *********************************************************************/
-+(void) lectureToDataBase:(NSDictionary *)dictionary{
+-(void) lectureToDataBase:(NSDictionary *)dictionary{
     NSData *tempData;
     
     if([NSJSONSerialization isValidJSONObject:dictionary])
@@ -98,7 +93,7 @@ NSString *const getAll = @"_all_docs?include_docs=true";
                                                    options:NSJSONWritingPrettyPrinted
                                                      error:NULL];
     }
-    //prepar request
+    //prepare request
     NSString *urlString = [NSString stringWithString: lecturesDB];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
@@ -112,7 +107,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     NSMutableData *postBody = [NSMutableData data];
     
     [postBody appendData:tempData];
-    //@"/Users/DQF/Desktop/CodeBakery/JSON/Glen.json"
     
     //post
     [request setHTTPBody:postBody];
@@ -133,7 +127,7 @@ NSString *const getAll = @"_all_docs?include_docs=true";
  ACCEPTS: Note or Message object as NSDictionary    
  RETURNS: NONE
  *********************************************************************/
-+(void) notificationToDataBase:(NSDictionary *)dictionary{
+-(void) notificationToDataBase:(NSDictionary *)dictionary{
     NSData *tempData;
     
     if([NSJSONSerialization isValidJSONObject:dictionary])
@@ -156,7 +150,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     NSMutableData *postBody = [NSMutableData data];
     
     [postBody appendData:tempData];
-    //@"/Users/DQF/Desktop/CodeBakery/JSON/Glen.json"
     
     //post
     [request setHTTPBody:postBody];
@@ -178,6 +171,8 @@ NSString *const getAll = @"_all_docs?include_docs=true";
  RETURNS: NSDictionary with lists of Student and Admin objects
  *********************************************************************/
 -(NSDictionary*)getUsers {
+    [[users objectForKey:@"ADMIN"] removeAllObjects];
+    [[users objectForKey:@"STUDENT"] removeAllObjects];
     NSString* urlString = [NSString stringWithFormat:@"%@%@", usersDB, getAll];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
@@ -203,7 +198,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
         usersDic = [usersDic objectForKey:@"rows"]; // Step into 'rows'
         for (NSDictionary *object in usersDic) {    // Step into JSON array (single index)
             NSDictionary* dict = [object objectForKey:@"doc"]; // Step into 'doc' (current object key/values)
-            //NSLog(@"OBJECT: %@", [dict allKeys]);
             
             User* usr = [User userWithName:[dict objectForKey:@"firstName"] 
                                   lastName:[dict objectForKey:@"lastName"]
@@ -230,6 +224,7 @@ NSString *const getAll = @"_all_docs?include_docs=true";
  RETURNS: NSMutableArray list with Lecture objects
  *********************************************************************/
 -(NSMutableArray*)getLectures {
+    [lectures removeAllObjects];
     NSString* urlString = [NSString stringWithFormat:@"%@%@", lecturesDB, getAll];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
@@ -282,6 +277,8 @@ NSString *const getAll = @"_all_docs?include_docs=true";
  RETURNS: NSDictionary with lists of Note and Message objects
  *********************************************************************/
 -(NSDictionary*)getNotifications {
+    [[notifications objectForKey:@"NOTES"] removeAllObjects];
+    [[notifications objectForKey:@"MESSAGES"] removeAllObjects];
     NSString* urlString = [NSString stringWithFormat:@"%@%@", notificationsDB, getAll];
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:urlString]];
@@ -307,7 +304,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
         noticesDic = [noticesDic objectForKey:@"rows"]; // Step into 'rows'
         for (NSDictionary *object in noticesDic) {    // Step into JSON array (single index)
             NSDictionary* dict = [object objectForKey:@"doc"]; // Step into 'doc' (current object key/values)
-            //NSLog(@"OBJECT: %@", [dict allKeys]);
             if([[dict objectForKey:@"type"]isEqualToString:@"note"]) {
                 Note* note = [Note noteWithText:[dict objectForKey:@"text"] 
                                            week:[dict objectForKey:@"week"] 

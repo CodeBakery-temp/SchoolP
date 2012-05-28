@@ -163,21 +163,16 @@
 }
 
 -(void)printLecture {
-    NSLog(@"________________________________________________");
-    NSLog(@"\nCourse: %@, %@, \nTeacher: %@, \nRoom: %@, \nCourseID: %@, \nVersion: %@, \nTime: %@-%@, \nLunch: %@-%@, \nYear: %@, \n_id: %@, \n_rev: %@ \n ",
+    NSLog(@"\nCourse: %@, %@, \nTeacher: %@, \nRoom: %@, \nTime: %@-%@, \nLunch: %@-%@, \nYear: %@ \n\n",
           self.course,
           self.grade,
           self.teacher,
           self.room,
-          self.courseID,
-          self.version,
           self.startTime,
           self.stopTime,
           self.lunchStart,
           self.lunchStop,
-          self.year,
-          self.couchDBId,
-          self.couchDBRev);
+          self.year);
 }
 
 @end

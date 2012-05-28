@@ -6,10 +6,10 @@
 
 @property (nonatomic, copy) NSString *userLogin;
 
-+(id) withUserDictionary: (NSDictionary *) dic;
++(id) login;
 
--(id) initWithUserDictionary: (NSDictionary *) dic;
+-(id) initWithUsers;
 
--(User*) checkLogin: (NSDictionary *) dic;
+-(User*) checkLogin;
 
 @end
