@@ -302,11 +302,11 @@
 }
 
 /*********************************************************************
- METHOD : CREATE SCHEDULE TEMPLATE OBJECT - SUPPLY WITH JSON
+ METHOD : CREATE LECTURE TEMPLATE OBJECT - SUPPLY WITH JSON
  ACCEPTS: NSString PATH to JSON DATA
  RETURNS: NONE
  *********************************************************************/
--(void)createSchedule:(NSArray *)lectures jsonPath:(NSString *)jsonPath {
+-(void)createLecture:(NSArray *)lectures jsonPath:(NSString *)jsonPath {
     NSData *data = [NSData dataWithContentsOfFile:jsonPath];
     NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data 
                                                                 options:NSJSONReadingMutableContainers 

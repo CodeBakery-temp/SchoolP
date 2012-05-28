@@ -32,7 +32,7 @@
 -(NSArray*)getUserMessages: (User*)user
              notifications: (NSArray *)notifications;
 
--(void)createSchedule:(NSArray *)lectures 
+-(void)createLecture:(NSArray *)lectures 
              jsonPath:(NSString *)jsonPath; 
 
 -(void)createNote:(NSString *)jsonPath;
