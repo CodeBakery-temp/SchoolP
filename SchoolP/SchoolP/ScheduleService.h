@@ -32,6 +32,13 @@
 -(NSArray*)getUserMessages: (User*)user
              notifications: (NSArray *)notifications;
 
+-(void)createSchedule:(NSArray *)lectures 
+             jsonPath:(NSString *)jsonPath; 
+
+-(void)createNote:(NSString *)jsonPath;
+
+-(void)createMessage:(NSString *)jsonPath;
+
 // TEST
 -(void)updateLectureTemplate:(NSString*)courseID 
                     lectures:(NSArray*) lectures 

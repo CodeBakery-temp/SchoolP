@@ -1,10 +1,10 @@
+#import "DBService.h"
 #import "ScheduleService.h"
+#import "Menu.h"
 #import "User.h"
 #import "Lecture.h"
-#import "DBService.h"
 #import "Note.h"
 #import "Message.h"
-#import "Menu.h"
 
 @implementation ScheduleService
 
@@ -19,8 +19,8 @@
     return [self initSchedule];
 }
 -(id)initSchedule {
-    if(self = [super init])
-    {}
+    if(self = [super init]) {
+    }
     return self;
 }
 
@@ -299,6 +299,57 @@
         }
     }
     return inbox;
+}
+
+/*********************************************************************
+ METHOD : CREATE SCHEDULE TEMPLATE OBJECT - SUPPLY WITH JSON
+ ACCEPTS: NSString PATH to JSON DATA
+ RETURNS: NONE
+ *********************************************************************/
+-(void)createSchedule:(NSArray *)lectures jsonPath:(NSString *)jsonPath {
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data 
+                                                                options:NSJSONReadingMutableContainers 
+                                                                  error:NULL];
+    // ID STAMP
+    NSString* numID = @"0";
+    int idInt = [numID intValue];
+    idInt +=1;
+    numID = [NSString stringWithFormat:@"%d", idInt];
+    NSLog(@"COURSEID %@", numID);
+    [dict setObject:numID forKey:@"courseID"];
+    [dict setObject:@"1" forKey:@"version"];
+    NSLog(@"%@", dict);
+    [DBService lectureToDataBase:dict];
+    
+}
+
+/*********************************************************************
+ METHOD : CREATE NOTE OBJECT - SUPPLY WITH JSON
+ ACCEPTS: NSString PATH to JSON DATA
+ RETURNS: NONE
+ *********************************************************************/
+-(void)createNote:(NSString *)jsonPath {
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data 
+                                                                options:NSJSONReadingMutableContainers 
+                                                                  error:NULL];
+    [dict setObject:@"note" forKey:@"type"];
+    [DBService notificationToDataBase:dict];
+}
+
+/*********************************************************************
+ METHOD : CREATE MESSAGE OBJECT - SUPPLY WITH JSON
+ ACCEPTS: NSString PATH to JSON DATA
+ RETURNS: NONE
+ *********************************************************************/
+-(void)createMessage:(NSString *)jsonPath {
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data 
+                                                                options:NSJSONReadingMutableContainers 
+                                                                  error:NULL];
+    [dict setObject:@"message" forKey:@"type"];
+    [DBService lectureToDataBase:dict];
 }
 
 /*********************************************************************

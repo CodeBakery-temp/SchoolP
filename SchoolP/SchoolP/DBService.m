@@ -81,8 +81,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     NSLog(@"Response Code: %ld", [urlResponse statusCode]);
     if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300) {
         NSLog(@"Response: %@", result);
-        
-        //here you get the response
     }
 }
 
@@ -127,8 +125,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     NSLog(@"Response Code: %ld", [urlResponse statusCode]);
     if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300) {
         NSLog(@"Response: %@", result);
-        
-        //here you get the response
     }
 }
 
@@ -173,7 +169,6 @@ NSString *const getAll = @"_all_docs?include_docs=true";
     NSLog(@"Response Code: %ld", [urlResponse statusCode]);
     if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300) {
         NSLog(@"Response: %@", result);
-        //here you get the response
     }
 }
 
