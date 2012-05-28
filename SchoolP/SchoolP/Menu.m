@@ -37,7 +37,7 @@
     NSLog(@"User logged in: \n %@", user);
     NSArray* lectures = [db getLectures];
     NSArray* allYourLectures = [schedule getLecturesOfWeek:user lectures:lectures currentWeek:[components week]];
-    NSDictionary* lecturesSorted = [schedule getLecturesPerDays:allYourLectures];
+    NSDictionary* lecturesSorted = [schedule getLecturesPerDaysRefined:allYourLectures];
     NSSet* lecturesToday = [schedule getLecturesOfDay:lecturesSorted];
     
     NSDictionary* notifications = [db getNotifications];
@@ -45,9 +45,9 @@
     NSArray* notes = [notifications objectForKey:@"NOTES"];
     NSArray* allYourNotes = [schedule getNotesOfWeek:user notes:notes currentWeek:[components week]];
     NSDictionary* notesSorted = [schedule getNotesPerDays:allYourNotes];
-    //[schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];
+    // MESSAGES
     NSArray* message = [notifications objectForKey:@"MESSAGES"];
-    NSLog(@"%lu", [message count]);
+    NSLog(@"Inbox :%lu", [message count]);
     
     
     if ([[user admin] isEqualTo:@"1"]) {
@@ -56,32 +56,28 @@
         
         /////// Denna kod här nedanför är menyn för ADMIN
         
-        NSLog (@"\n\n 1 = Create Schedule \n 2 = Send Message \n 3 = Send Message to all \n 4 = Edit Schedule \n 5 = Today \n 6 = Week \n 0 = Exit\n\n\n");
+        NSLog (@"\n\n 1 = Create Schedule \n 2 = Send Message[One] \n 3 = Send Message[Many] \n 4 = Edit Schedule \n 5 = Today \n 6 = Week \n7 = Create Note \n 0 = Exit\n\n\n");
         
-        NSLog(@"Pick a number between 1 and 7:");
+        NSLog(@"Pick a number between 1 and 6:");
         do {
             scanf ("%i", &value);
             switch (value)
             {
                 case 1:
                     [DBService postToDatabase:[DBService lecturesDB] sourcePath:@"/Users/DQF/Desktop/schema.json"];
-                    
                     break;
                 case 2:
                     //Create Message
                     [schedule createMessage:@"/Users/Evhuul/Desktop/message.json"];
-                    
                     break;
                 case 3:
                     //Create Message to to all
                     [schedule createMessage:@"/Users/Evhuul/Desktop/messageall.json"];
-                    
                     break;
                 case 4:
                     [[ScheduleService alloc] updateLectureTemplate:@"3" //id på kursen 1 JavaScript, 2 Objective-C, 3 InDesign
                                                           lectures:lectures 
                                                           jsonPath:@"/Users/DQF/Desktop/schema.json"];
-                
                     break;
                 case 5:
                     for (Lecture* lec in lecturesToday) {
@@ -89,9 +85,10 @@
                     }
                     break;
                 case 6:
-                    //NSLog (@"\nlectures this week:\n%@", [lecturesSorted description]);
                     [schedule printCurrentWeek:lecturesSorted notes:notesSorted];
-                    
+                    break;
+                case 7:
+                    [schedule createNote:@"/Users/Evhuul/Desktop/note.json"];
                     break;
                 default:
                     while (value != 0);
@@ -100,7 +97,7 @@
             }
         }while (value != 0); 
         /////// Denna kod här nedanför är menyn för STUDENT
-    } else {NSLog (@"\n\n 1 = Today \n 2 = Week \n 3 = Messages \n 0 = Exit\n\n\n");
+    } else {NSLog (@"\n\n 1 = Today \n 2 = Week \n 3 = Inbox \n 0 = Exit\n\n\n");
         NSLog(@"Pick a number between 1 and 3:");
         do {
             scanf ("%i", &value);
@@ -112,14 +109,12 @@
                     }
                     break;
                 case 2:
-                    //NSLog (@"\nlectures this week:\n%@", [lecturesSorted description]);
                     [schedule printCurrentWeek:lecturesSorted notes:notesSorted];
                     
                     break;
                 case 3:
-                    //NSLog (@"Reminder Notes: %@", [notesSorted description]);
                     [schedule getUserMessages:user messages:message];
-                    
+                    [schedule printInbox:message];
                     break;
                 default:
                     while (value != 0);
