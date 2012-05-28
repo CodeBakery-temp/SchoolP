@@ -516,6 +516,17 @@
     }
 }
 
+/*********************************************************************
+ METHOD : PRINT ALL MESSAGE OBJECTS FROM INBOX
+ ACCEPTS: NSArray with Message objects
+ RETURNS: NONE
+ *********************************************************************/
+-(void)printInbox:(NSArray *)messages {
+    for(Message* message in messages) {
+        NSLog(@"-MESSAGE: %@: %@", [message sender], [message text]);
+    }
+}
+
 
 
 @end

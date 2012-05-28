@@ -61,4 +61,6 @@
 -(void)printCurrentDay:(NSDictionary*)lectures 
                  notes:(NSDictionary*)notes;
 
+-(void)printInbox:(NSArray*)messages;
+
 @end
