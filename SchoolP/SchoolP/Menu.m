@@ -5,6 +5,7 @@
 #import "Note.h"
 #import "DBService.h"
 #import "LoginService.h"
+#import "Message.h"
 
 @implementation Menu
 
@@ -39,11 +40,14 @@
     NSDictionary* lecturesSorted = [schedule getLecturesPerDays:allYourLectures];
     NSSet* lecturesToday = [schedule getLecturesOfDay:lecturesSorted];
     
+    NSDictionary* notifications = [db getNotifications];
     // GET NOTES
-    NSArray* notes = [[db getNotifications]objectForKey:@"NOTES"];
+    NSArray* notes = [notifications objectForKey:@"NOTES"];
     NSArray* allYourNotes = [schedule getNotesOfWeek:user notes:notes currentWeek:[components week]];
     NSDictionary* notesSorted = [schedule getNotesPerDays:allYourNotes];
     //[schedule printLecturesWithNotes:lecturesSorted notes:notesSorted];
+    NSArray* message = [notifications objectForKey:@"MESSAGES"];
+    NSLog(@"%lu", [message count]);
     
     
     if ([[user admin] isEqualTo:@"1"]) {
@@ -52,7 +56,7 @@
         
         /////// Denna kod här nedanför är menyn för ADMIN
         
-        NSLog (@"\n\n 1 = Create Schedule \n 2 = Create Message \n 3 = Create Message to class \n 4 = Edit Schedule \n 5 = Today \n 6 = Week \n 0 = Exit\n\n\n");
+        NSLog (@"\n\n 1 = Create Schedule \n 2 = Send Message \n 3 = Send Message to all \n 4 = Edit Schedule \n 5 = Today \n 6 = Week \n 0 = Exit\n\n\n");
         
         NSLog(@"Pick a number between 1 and 7:");
         do {
@@ -65,10 +69,12 @@
                     break;
                 case 2:
                     //Create Message
+                    [schedule createMessage:@"/Users/Evhuul/Desktop/message.json"];
                     
                     break;
                 case 3:
-                    //Create Message to class
+                    //Create Message to to all
+                    [schedule createMessage:@"/Users/Evhuul/Desktop/messageall.json"];
                     
                     break;
                 case 4:
@@ -112,6 +118,7 @@
                     break;
                 case 3:
                     //NSLog (@"Reminder Notes: %@", [notesSorted description]);
+                    [schedule getUserMessages:user messages:message];
                     
                     break;
                 default:

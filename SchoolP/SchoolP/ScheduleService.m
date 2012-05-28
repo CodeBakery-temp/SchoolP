@@ -289,9 +289,9 @@
  ACCEPTS: NSDictionary with at least NSSet of Message objects
  RETURNS: NSArray with Message objects for User
  *********************************************************************/
--(NSArray*)getUserMessages:(User*)user notifications:(NSDictionary *)notifications {
+-(NSArray*)getUserMessages:(User*)user messages:(NSArray *)messages {
     NSMutableArray* inbox = [NSMutableArray array];
-    for(Message* message in [notifications objectForKey:@"MESSAGE"]) {
+    for(Message* message in messages) {
         for(NSString* email in [message receiver]) {
             if([[user mailAddress]isEqualTo:email]) {
                 [inbox addObject:message];
@@ -349,7 +349,7 @@
                                                                 options:NSJSONReadingMutableContainers 
                                                                   error:NULL];
     [dict setObject:@"message" forKey:@"type"];
-    [DBService lectureToDataBase:dict];
+    [DBService notificationToDataBase:dict];
 }
 
 /*********************************************************************

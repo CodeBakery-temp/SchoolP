@@ -1,9 +1,9 @@
 #import <Foundation/Foundation.h>
-#import "User.h"
-#import "ScheduleService.h"
-#import "DBService.h"
-#import "LoginService.h"
-#import "Lecture.h"
+//#import "User.h"
+//#import "ScheduleService.h"
+//#import "DBService.h"
+//#import "LoginService.h"
+//#import "Lecture.h"
 #import "Menu.h"
 
 int main(int argc, const char * argv[])

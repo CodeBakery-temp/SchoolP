@@ -20,7 +20,11 @@
     return self;
 }
 
-
+/*************************************************
+ Login part to check if your a admin or a student.
+ Just to make it easier to separate each other
+ for different menus.
+ *************************************************/
 -(User*) checkLogin: (NSDictionary *) dic
 {
     BOOL state = TRUE;

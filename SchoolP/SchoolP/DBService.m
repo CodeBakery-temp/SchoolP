@@ -5,9 +5,9 @@
 #import "Menu.h"
 #import "User.h"
 
-NSString *const usersDB = @"http://you.iriscouch.com/schoolp-users/";
-NSString *const lecturesDB = @"http://you.iriscouch.com//schoolp-schedules/";
-NSString *const notificationsDB = @"http://you.iriscouch.com/schoolp-notifications/";
+NSString *const usersDB = @"http://zephyr.iriscouch.com/schoolp-users/";
+NSString *const lecturesDB = @"http://zephyr.iriscouch.com//schoolp-schedules/";
+NSString *const notificationsDB = @"http://zephyr.iriscouch.com/schoolp-notifications/";
 NSString *const getAll = @"_all_docs?include_docs=true";
 //http://127.0.0.1:5984/
 //http://you.iriscouch.com/

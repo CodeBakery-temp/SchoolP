@@ -30,7 +30,7 @@
 -(NSSet*)getNotesOfDay:(NSDictionary*)notes;
 
 -(NSArray*)getUserMessages: (User*)user
-             notifications: (NSArray *)notifications;
+             messages: (NSArray *)messages;
 
 -(void)createLecture:(NSArray *)lectures 
              jsonPath:(NSString *)jsonPath; 
