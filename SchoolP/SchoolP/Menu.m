@@ -71,29 +71,29 @@ NSString const* homefolder = @"username";
                     break;
                 case 4:
                     // Create Lecture Template
-                    [schedule createLecture:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
+                    [schedule createLecture:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
                     //id på kursen 1 JavaScript, 2 Objective-C, 3 InDesign
                     break;
                 case 5:
                     // Update Lecture Template
-                    [schedule updateLectureTemplate:@"1" jsonPath:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
+                    [schedule updateLectureTemplate:@"1" jsonPath:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
                     break;
                 case 6:
                     // Update Lecture Event
-                    [schedule updateLectureEvent:@"1" version:@"1" jsonPath:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
+                    [schedule updateLectureEvent:@"4" version:@"1" jsonPath:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
                     
                     break;
                 case 7:
                     // Create Note
-                    [schedule createNote:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/note.json", homefolder]];
+                    [schedule createNote:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/note.json", homefolder]];
                     break;
                 case 8:
                     // Create Message [ONE]
-                    [schedule createMessage:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/message.json", homefolder]];
+                    [schedule createMessage:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/message.json", homefolder]];
                     break;
                 case 9:
                     // Create Message [MANY]
-                    [schedule createMessage:[NSString stringWithFormat:@"/Users/%c/Dropbox/Project Schema/kod/JSON/messageAll.json", homefolder]];
+                    [schedule createMessage:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/messageAll.json", homefolder]];
                     break;
                 default:
                     while (value != 0);

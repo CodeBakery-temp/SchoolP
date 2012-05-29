@@ -368,6 +368,7 @@
                                                                           error:NULL];
             [dict setObject:[lec couchDBId] forKey:@"_id"];
             [dict setObject:[lec couchDBRev] forKey:@"_rev"];
+            [dict setObject:[lec courseID] forKey:@"courseID"];
             [dict setObject:@"1" forKey:@"version"];
             [db lectureToDataBase:dict];
             
@@ -404,6 +405,7 @@
                 int verInt = [ver intValue];
                 verInt +=1;
                 ver = [NSString stringWithFormat:@"%d", verInt];
+                [dict setObject:[lec courseID] forKey:@"courseID"];
                 [dict setObject:ver forKey:@"version"];
                 [db lectureToDataBase:dict];
                 
@@ -412,6 +414,7 @@
                 // EDIT EXISTING EVENT
                 [dict setObject:[lec couchDBId] forKey:@"_id"];
                 [dict setObject:[lec couchDBRev] forKey:@"_rev"];
+                [dict setObject:[lec courseID] forKey:@"courseID"];
                 [dict setObject:[lec version] forKey:@"version"];
                 [db lectureToDataBase:dict];
             }
