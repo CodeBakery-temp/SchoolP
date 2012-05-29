@@ -20,9 +20,6 @@
 @synthesize lunchStop = _lunchStop;
 @synthesize year = _year;
 
-// daysOfWeek
-// weeks
-
 +(id) courseWithName:(NSString *)course
                grade:(NSString *)grade
              teacher: (NSString*)teacher

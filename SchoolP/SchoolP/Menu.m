@@ -60,20 +60,14 @@ NSString const* homefolder = @"username";
                 case 1:
                     // Lectures DAY
                     [schedule printCurrentDay:lecturesSorted notes:notesSorted];
-                    /*for (Lecture* lec in lecturesToday) {
-                        [lec printLecture];
-                    }*/
-                    //[schedule createLecture:[db getLectures] jsonPath:@"/Users/DQF/Desktop/schema.json"];
                     break;
                 case 2:
                     // Lectures WEEK
                     [schedule printCurrentWeek:lecturesSorted notes:notesSorted];
-                    //[schedule createMessage:@"/Users/Evhuul/Desktop/message.json"];
                     break;
                 case 3:
                     // Message Inbox
                     [schedule printInbox:[schedule getUserMessages:user]];
-                    //[schedule createMessage:@"/Users/Evhuul/Desktop/messageall.json"];
                     break;
                 case 4:
                     // Create Lecture Template

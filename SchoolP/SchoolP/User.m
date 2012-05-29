@@ -11,7 +11,6 @@ NSMutableArray *coursesArray;
 @synthesize phoneNumber = _phoneNumber;
 @synthesize password = _password;
 @synthesize admin = _admin;
-//@synthesize courses = _courses;
 
 +(id) userWithName:(NSString *)name 
           lastName:(NSString *)lastName
