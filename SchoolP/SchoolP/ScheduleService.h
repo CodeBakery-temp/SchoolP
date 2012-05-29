@@ -36,17 +36,14 @@
 -(void)createMessage:(NSString *)jsonPath;
 
 // TEST
--(void)updateLectureTemplate:(NSString*)courseID  
-                    jsonPath:(NSString*)jsonPath;
+-(void)updateLectureTemplate:(NSString*)jsonPath;
 
--(void)updateLectureEvent:(NSString*)courseID 
-                  version:(NSString*)version  
-                 jsonPath:(NSString*)jsonPath;
+-(void)updateLectureEvent:(NSString*)jsonPath;
 
 // APP
--(void)updateLectureTemplate:(Lecture*)lecture; // TO-DO
+//-(void)updateLectureTemplate:(Lecture*)lecture; // TO-DO
 
--(void)updateLectureEvent:(Lecture*)lecture; // TO-DO
+//-(void)updateLectureEvent:(Lecture*)lecture; // TO-DO
 
 
 -(void)printCurrentWeek:(NSDictionary*)lectures 

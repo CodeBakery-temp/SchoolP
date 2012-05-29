@@ -312,7 +312,6 @@
     for(Lecture* lec in lectures) {
         if([[lec courseID]isGreaterThan:objID]) {
             objID = [lec courseID];
-            NSLog(@"ID: %@", [lec courseID]);
         }
     }
     int idInt = [objID intValue];
@@ -320,6 +319,7 @@
     objID = [NSString stringWithFormat:@"%d", idInt];
     [dict setObject:objID forKey:@"courseID"];
     [dict setObject:@"1" forKey:@"version"];
+    NSLog(@"CREATE ID: %@", [dict objectForKey:@"courseID"]);
     [db lectureToDataBase:dict];
 }
 
@@ -356,16 +356,15 @@
  ACCEPTS: NSString with number of ID, NSArray with Lecture objects, NSString PATH to JSON DATA
  RETURNS: NONE
  *********************************************************************/
--(void)updateLectureTemplate:(NSString *)courseID 
-                    jsonPath:(NSString*)jsonPath {
+-(void)updateLectureTemplate:(NSString*)jsonPath {
     NSArray* lectures = [db getLectures];
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data 
+                                                                options:NSJSONReadingMutableContainers 
+                                                                  error:NULL];
     
     for(Lecture* lec in lectures) {
-        if([[lec courseID]isEqualTo:courseID]&&[[lec version]isEqualTo:@"1"]) {
-            NSData *data = [NSData dataWithContentsOfFile:jsonPath];
-            NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data 
-                                                                        options:NSJSONReadingMutableContainers 
-                                                                          error:NULL];
+        if([[lec courseID]isEqualTo:[dict objectForKey:@"courseID"]]&&[[lec version]isEqualTo:@"1"]) {
             [dict setObject:[lec couchDBId] forKey:@"_id"];
             [dict setObject:[lec couchDBRev] forKey:@"_rev"];
             [dict setObject:[lec courseID] forKey:@"courseID"];
@@ -382,18 +381,16 @@
  ACCEPTS: NSString with number of ID, NSString with number of version, NSArray with Lecture objects, NSString PATH to JSON DATA
  RETURNS: NONE
  *********************************************************************/
--(void)updateLectureEvent:(NSString *)courseID 
-                  version:(NSString*)version 
-                 jsonPath:(NSString*)jsonPath {
+-(void)updateLectureEvent:(NSString*)jsonPath {
     NSArray* lectures = [db getLectures];
-    
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data 
+                                                                options:NSJSONReadingMutableContainers 
+                                                                  error:NULL];
+    NSLog(@"%@ %@", [dict objectForKey:@"courseID"], [dict objectForKey:@"version"]);
     for(Lecture* lec in lectures) {
-        if([[lec courseID]isEqualTo:courseID]&&[[lec version]isEqualTo:version]) {
-            NSData *data = [NSData dataWithContentsOfFile:jsonPath];
-            NSMutableDictionary *dict = [NSJSONSerialization JSONObjectWithData:data 
-                                                                        options:NSJSONReadingMutableContainers 
-                                                                          error:NULL];
-            if(version==@"1") {
+        if([[lec courseID]isEqualTo:[dict objectForKey:@"courseID"]]&&[[lec version]isEqualTo:[dict objectForKey:@"version"]]) {
+            if([[dict objectForKey:@"version"]isEqualTo:@"1"]) {
                 // CREATE NEW EVENT
                 // VERSION STAMP
                 NSString* ver = @"1";
@@ -407,6 +404,7 @@
                 ver = [NSString stringWithFormat:@"%d", verInt];
                 [dict setObject:[lec courseID] forKey:@"courseID"];
                 [dict setObject:ver forKey:@"version"];
+                NSLog(@"ID: %@ WITH VERSION: %@", [dict objectForKey:@"courseID"], [dict objectForKey:@"version"]);
                 [db lectureToDataBase:dict];
                 
             }
@@ -421,24 +419,6 @@
             break;
         }
     }
-}
-
-/*********************************************************************
- METHOD : UPDATE LECTURE OBJECT TEMPLATE WITH VERSION 1 - SUPPLY WITH OBJECT
- ACCEPTS: Lecture object
- RETURNS: NONE
- *********************************************************************/
--(void)updateLectureTemplate:(Lecture*)lecture {
-    // check if class is Lecture object
-}
-
-/*********************************************************************
- METHOD : UPDATE LECTURE OBJECT - CREATE MODIFIED INSTANCE OR EDIT INSTANCE - SUPPLY WITH OBJECT
- ACCEPTS: Lecture object
- RETURNS: NONE
- *********************************************************************/
--(void)updateLectureEvent:(Lecture*)lecture {
-    // check if class is Lecture object
 }
 
 /*********************************************************************

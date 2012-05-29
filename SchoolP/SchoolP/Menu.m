@@ -7,7 +7,7 @@
 #import "User.h"
 #import "Message.h"
 
-NSString const* homefolder = @"username";
+NSString const* homefolder = @"christoffernordin";
 
 @implementation Menu
 
@@ -71,16 +71,16 @@ NSString const* homefolder = @"username";
                     break;
                 case 4:
                     // Create Lecture Template
-                    [schedule createLecture:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
+                    [schedule createLecture:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/lectureTemplate.json", homefolder]];
                     //id på kursen 1 JavaScript, 2 Objective-C, 3 InDesign
                     break;
                 case 5:
                     // Update Lecture Template
-                    [schedule updateLectureTemplate:@"1" jsonPath:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
+                    [schedule updateLectureTemplate:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
                     break;
                 case 6:
                     // Update Lecture Event
-                    [schedule updateLectureEvent:@"4" version:@"1" jsonPath:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
+                    [schedule updateLectureEvent:[NSString stringWithFormat:@"/Users/%@/Dropbox/Project Schema/kod/JSON/lecture.json", homefolder]];
                     
                     break;
                 case 7:
