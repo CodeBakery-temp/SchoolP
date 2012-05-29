@@ -7,7 +7,7 @@
 #import "User.h"
 #import "Message.h"
 
-NSString const* homefolder = @"christoffernordin";
+NSString const* homefolder = @"username";
 
 @implementation Menu
 
